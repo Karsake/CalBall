@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "ball",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -25,26 +25,23 @@
     "_components": [
       {
         "__id__": 6
-      },
-      {
-        "__id__": 7
       }
     ],
     "_prefab": {
-      "__id__": 8
+      "__id__": 7
     },
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 184,
-      "b": 0,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 300,
-      "height": 120
+      "width": 80,
+      "height": 80
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -53,8 +50,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 386,
-      "y": 787,
+      "x": -457,
+      "y": 824,
       "z": 0
     },
     "_scale": {
@@ -79,7 +76,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "title",
+    "_name": "score",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -108,8 +105,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 201.13,
-      "height": 60
+      "width": 28.25,
+      "height": 40
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -119,7 +116,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -4,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -151,10 +148,10 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "START",
-    "_N$string": "START",
-    "_fontSize": 60,
-    "_lineHeight": 60,
+    "_string": "0",
+    "_N$string": "0",
+    "_fontSize": 40,
+    "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -177,12 +174,12 @@
     "_enabled": true,
     "_color": {
       "__type__": "cc.Color",
-      "r": 138,
-      "g": 66,
-      "b": 0,
+      "r": 104,
+      "g": 104,
+      "b": 104,
       "a": 255
     },
-    "_width": 5,
+    "_width": 3,
     "_id": ""
   },
   {
@@ -191,9 +188,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "4308a730-d0b6-4c2d-aa9f-f32b3cf60c38"
+      "__uuid__": "9e452434-c048-498e-aa33-8cf95634bf58"
     },
-    "fileId": "e3S/xBDg5OAYhX3Z918vXu",
+    "fileId": "a6lNUC37BDsL/OlFO46APP",
     "sync": false
   },
   {
@@ -205,9 +202,9 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "7fab140b-b2d2-4b26-8479-bb4f15105197"
+      "__uuid__": "8ce9bdcf-49e2-4aa3-a38d-c728818ce627"
     },
-    "_type": 1,
+    "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -225,80 +222,14 @@
     "_id": ""
   },
   {
-    "__type__": "cc.Button",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "duration": 0.1,
-    "zoomScale": 1.2,
-    "clickEvents": [],
-    "_N$interactable": true,
-    "_N$enableAutoGrayEffect": false,
-    "_N$transition": 3,
-    "transition": 3,
-    "_N$normalColor": {
-      "__type__": "cc.Color",
-      "r": 214,
-      "g": 214,
-      "b": 214,
-      "a": 255
-    },
-    "_N$pressedColor": {
-      "__type__": "cc.Color",
-      "r": 211,
-      "g": 211,
-      "b": 211,
-      "a": 255
-    },
-    "pressedColor": {
-      "__type__": "cc.Color",
-      "r": 211,
-      "g": 211,
-      "b": 211,
-      "a": 255
-    },
-    "_N$hoverColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "hoverColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_N$disabledColor": {
-      "__type__": "cc.Color",
-      "r": 124,
-      "g": 124,
-      "b": 124,
-      "a": 255
-    },
-    "_N$normalSprite": null,
-    "_N$pressedSprite": null,
-    "pressedSprite": null,
-    "_N$hoverSprite": null,
-    "hoverSprite": null,
-    "_N$disabledSprite": null,
-    "_N$target": null,
-    "_id": ""
-  },
-  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "4308a730-d0b6-4c2d-aa9f-f32b3cf60c38"
+      "__uuid__": "9e452434-c048-498e-aa33-8cf95634bf58"
     },
-    "fileId": "3e9svTCk1K9IqWxOppi/7S",
+    "fileId": "6fsn/avUJBN5Bph3qbxylq",
     "sync": false
   }
 ]

@@ -29,11 +29,12 @@ export enum BallColor{
 }
 
 class GameConfig{
-    line:number = 0;
-    collumn:number = 0;
-    ballSize:number = 0;
+    row:number = 10;
+    collumn:number = 8;
+    ballSize:number = 80;
     initMin:number = BallScore.lv1;
     initMax:number = BallScore.lv6;
+    heightShift:number = 0.866;//3^0.5 / 2
 }
 export default new GameConfig()
 
@@ -42,7 +43,7 @@ export enum CLIENT_EVENT{
 }
 
 export enum SCENE_NAME{
-    PRELOAD="preload",
-    GAME="game",
-    HOME="home",
+    PRELOAD="Preload",
+    GAME="Game",
+    HOME="Home",
 }

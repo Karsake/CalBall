@@ -9,7 +9,16 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class Game extends cc.Component {
 
-    start () {   
+    @property(cc.Prefab)
+    ballPrefab: cc.Prefab = null;
+
+    @property(cc.Node)
+    shootingBallNode:cc.Node = null;
+
+    @property(cc.Node)
+    ballPanelNode:cc.Node = null;
+    start () {
+        
     }
 
     onLoad () {
@@ -31,6 +40,13 @@ export default class Game extends cc.Component {
     private initNewGame() {
         ScoreController.instance.init();
         BallController.instance.init();
+        for(let i in BallController.instance.ballGroup) {
+            for(let j in BallController.instance.ballGroup[i]) {
+                var x:cc.Node = cc.instantiate(this.ballPrefab);
+                x.parent = this.ballPanelNode;
+                BallController.instance.ballGroup[i][j].init(i,j,x)
+            }
+        }
     }
 
     private setBalls() {
@@ -38,7 +54,7 @@ export default class Game extends cc.Component {
     }
 
     private showScore() {
-        ScoreController.instance.score = 123;
+        ScoreController.instance.score;
     }
 
     private ballPush() {

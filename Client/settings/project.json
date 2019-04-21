@@ -5,8 +5,8 @@
       true
     ]
   ],
-  "design-resolution-height": 640,
-  "design-resolution-width": 960,
+  "design-resolution-height": 1334,
+  "design-resolution-width": 750,
   "excluded-modules": [
     "Mask",
     "Graphics",
@@ -34,7 +34,7 @@
     }
   },
   "fit-height": true,
-  "fit-width": false,
+  "fit-width": true,
   "group-list": [
     "default"
   ],
@@ -44,7 +44,7 @@
     "height": 640,
     "width": 960
   },
+  "start-scene": "cff8f153-b795-441e-9f2d-d51bb5e49865",
   "use-customize-simulator": true,
-  "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "use-project-simulator-setting": false
 }

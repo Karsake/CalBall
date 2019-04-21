@@ -1,4 +1,4 @@
-import { BallScore, BallColor } from "../Utils/GameConfig";
+import GameConfig, { BallScore, BallColor } from "../Utils/GameConfig";
 
 const {ccclass, property} = cc._decorator;
 
@@ -12,17 +12,21 @@ export default class BallData extends cc.Component {
     private _color:BallColor;
     private _isNew:Boolean;
 
-    private _ballNode:cc.Node;
-    public BallData(row,column,ballNode:cc.Node) {
+    init(row,column,ballNode:cc.Node) {
+        // console.log(row,column,ballNode)
         if(ballNode instanceof cc.Node) {
             this._row = row;
             this._column = column
-            this._ballNode = ballNode;
+            this.node = ballNode;
         }else{
             throw("bubble init failure")
         }
+        this.setBall()
     }
 
+    setBall() {
+        this.node.setPosition((this._row  * 1  + (this._column % 2) / 2) * GameConfig.ballSize , this._column * GameConfig.heightShift* GameConfig.ballSize);//todo 这玩意需要排版一下
+    }
     /**
      * 设置求的分数，顺便改变球的颜色
      */

@@ -1,5 +1,5 @@
 import ScoreController from "../Controller/ScoreController";
-import { CLIENT_EVENT } from "../Utils/GameConfig";
+import { CLIENT_EVENT, SCENE_NAME } from "../Utils/GameConfig";
 
 const {ccclass, property} = cc._decorator;
 
@@ -32,4 +32,11 @@ export default class Home extends cc.Component {
         cc.director.off(CLIENT_EVENT.SCORE_UPDATE,this.showScore);
     }
     // update (dt) {}
+
+    /**
+     * start game button action
+     */
+    toGame() {
+        cc.director.loadScene(SCENE_NAME.GAME)
+    }
 }
