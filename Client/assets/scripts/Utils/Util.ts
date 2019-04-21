@@ -3,8 +3,8 @@ import ScoreController from "../Controller/ScoreController";
 class Util{
     loadSave() {
         var x:GameSave = JSON.parse(localStorage.getItem("game_save"));
-        ScoreController.instance.lastScore = isFinite(x.lastScore) && x.lastScore > 0 ? x.lastScore:0;
-        ScoreController.instance.maxScore = isFinite(x.maxScore) && x.maxScore > 0 ? x.maxScore:0;
+        ScoreController.instance.lastScore = x && isFinite(x.lastScore) && x.lastScore > 0 ? x.lastScore:0;
+        ScoreController.instance.maxScore = x && isFinite(x.maxScore) && x.maxScore > 0 ? x.maxScore:0;
         this.setSave();
     }
 

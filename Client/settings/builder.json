@@ -29,14 +29,14 @@
     "portrait": false,
     "upsideDown": false
   },
-  "packageName": "org.cocos2d.Client",
+  "packageName": "org.cocos2d.NewProject",
   "qqplay": {
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait",
     "zip": false
   },
   "startScene": "cff8f153-b795-441e-9f2d-d51bb5e49865",
-  "title": "Client",
+  "title": "NewProject",
   "webOrientation": "auto",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
@@ -44,6 +44,6 @@
     "orientation": "portrait",
     "subContext": ""
   },
-  "xxteaKey": "69241caf-a82c-4a",
+  "xxteaKey": "8564bc99-e648-4d",
   "zipCompressJs": true
 }
