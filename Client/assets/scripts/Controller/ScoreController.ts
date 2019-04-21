@@ -13,7 +13,8 @@ export default class ScoreController{
    
     private _score:number  = 0;
     public isUpdating:Boolean = false;
-
+    private _maxScore:number = 0;
+    private _lastScore:number = 0;
     /**
      * 初始化分数
      */
@@ -37,6 +38,19 @@ export default class ScoreController{
         return this._score;
     }
 
+    public set maxScore(score) {
+        this._maxScore = score;
+    }
+
+    public get maxScore() {
+        return this._maxScore;
+    }
+    public set lastScore(score) {
+        this._lastScore = score;
+    }
+    public get lastScore() {
+        return this._lastScore;
+    }
     /**
      * 更新游戏分数的逻辑
      */

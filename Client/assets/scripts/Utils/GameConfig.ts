@@ -1,12 +1,3 @@
-class GameConfig{
-    line:number = 0;
-    collumn:number = 0;
-    ballSize:number = 0;
-    initMin:number = BallScore.lv1;
-    initMax:number = BallScore.lv6;
-}
-export default new GameConfig()
-
 export enum BallScore{
     lv0=0,
     lv1=2,
@@ -37,6 +28,15 @@ export enum BallColor{
     lv11="#FF99CC"
 }
 
+class GameConfig{
+    line:number = 0;
+    collumn:number = 0;
+    ballSize:number = 0;
+    initMin:number = BallScore.lv1;
+    initMax:number = BallScore.lv6;
+}
+export default new GameConfig()
+
 export enum CLIENT_EVENT{
     SCORE_UPDATE="SCORE_UPDATE",
 }
@@ -44,5 +44,5 @@ export enum CLIENT_EVENT{
 export enum SCENE_NAME{
     PRELOAD="preload",
     GAME="game",
-
+    HOME="home",
 }

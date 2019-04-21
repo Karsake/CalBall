@@ -1,5 +1,4 @@
 {
-  "assets-sort-type": "name",
   "collision-matrix": [
     [
       true
@@ -15,22 +14,11 @@
     "Toggle",
     "Animation"
   ],
-  "facebook": {
-    "appID": "",
-    "audience": {
-      "enable": false
-    },
-    "enable": false,
-    "live": {
-      "enable": false
-    }
-  },
   "fit-height": true,
   "fit-width": true,
   "group-list": [
     "default"
   ],
-  "last-module-event-record-time": 1555656792591,
   "simulator-orientation": false,
   "simulator-resolution": {
     "height": 640,
@@ -38,5 +26,17 @@
   },
   "start-scene": "current",
   "use-customize-simulator": true,
-  "use-project-simulator-setting": false
+  "use-project-simulator-setting": false,
+  "last-module-event-record-time": 0,
+  "assets-sort-type": "name",
+  "facebook": {
+    "enable": false,
+    "appID": "",
+    "live": {
+      "enable": false
+    },
+    "audience": {
+      "enable": false
+    }
+  }
 }
