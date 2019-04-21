@@ -1,4 +1,4 @@
-import { CLIENT_EVENT } from "../Utils/GameConfig";
+import { CLIENT_EVENT } from "../Utils/Util";
 
 export default class ScoreController{
 
@@ -45,12 +45,15 @@ export default class ScoreController{
     public get maxScore() {
         return this._maxScore;
     }
+
     public set lastScore(score) {
         this._lastScore = score;
     }
+
     public get lastScore() {
         return this._lastScore;
     }
+
     /**
      * 更新游戏分数的逻辑
      */

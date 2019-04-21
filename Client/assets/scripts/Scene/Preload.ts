@@ -1,5 +1,4 @@
-import { SCENE_NAME } from "../Utils/GameConfig";
-import Util from "../Utils/Util";
+import Util, { SCENE_NAME } from "../Utils/Util";
 
 const {ccclass, property} = cc._decorator;
 

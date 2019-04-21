@@ -1,4 +1,5 @@
-import GameConfig, { BallScore, BallColor } from "../Utils/GameConfig";
+import GameConfig from "../Utils/GameConfig";
+import { BallScore, BallColor } from "../Utils/Util";
 
 const {ccclass, property} = cc._decorator;
 
@@ -27,6 +28,7 @@ export default class BallData extends cc.Component {
     setBall() {
         this.node.setPosition((this._row  * 1  + (this._column % 2) / 2) * GameConfig.ballSize , this._column * GameConfig.heightShift* GameConfig.ballSize);//todo 这玩意需要排版一下
     }
+
     /**
      * 设置求的分数，顺便改变球的颜色
      */

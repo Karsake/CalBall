@@ -1,6 +1,6 @@
 import ScoreController from "../Controller/ScoreController";
-import Config, { BallScore, CLIENT_EVENT } from "../Utils/GameConfig";
-import Util from "../Utils/Util";
+import Config from "../Utils/GameConfig";
+import Util, { CLIENT_EVENT } from "../Utils/Util";
 import BallController from "../Controller/BallController";
 import BallData from "../Entity/BallData";
 
