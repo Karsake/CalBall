@@ -1,5 +1,5 @@
 import GameConfig from "../Utils/GameConfig";
-import { BallScore, BallColor } from "../Utils/Util";
+import { BallScore, BallColor } from "../Utils/Define";
 
 const {ccclass, property} = cc._decorator;
 

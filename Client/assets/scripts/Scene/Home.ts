@@ -1,5 +1,5 @@
 import ScoreController from "../Controller/ScoreController";
-import { CLIENT_EVENT, SCENE_NAME } from "../Utils/Util";
+import { CLIENT_EVENT, SCENE_NAME } from "../Utils/Define";
 
 const {ccclass, property} = cc._decorator;
 

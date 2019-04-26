@@ -1,4 +1,4 @@
-import {BallScore} from "../Utils/Util";
+import {BallScore} from "../Utils/Define";
 class GameConfig{
     row:number = 10;
     collumn:number = 8;

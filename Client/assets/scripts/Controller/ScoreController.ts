@@ -1,4 +1,4 @@
-import { CLIENT_EVENT } from "../Utils/Util";
+import { CLIENT_EVENT } from "../Utils/Define";
 
 export default class ScoreController{
 
