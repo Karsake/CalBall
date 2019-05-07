@@ -1,0 +1,62 @@
+
+80.png
+size: 256,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+图层_2
+  rotate: false
+  xy: 82, 148
+  size: 55, 55
+  orig: 55, 55
+  offset: 0, 0
+  index: -1
+图层_2_副本_7
+  rotate: false
+  xy: 82, 81
+  size: 65, 65
+  orig: 65, 65
+  offset: 0, 0
+  index: -1
+图层_2_副本
+  rotate: false
+  xy: 163, 76
+  size: 71, 71
+  orig: 71, 71
+  offset: 0, 0
+  index: -1
+图层_2_副本_2
+  rotate: false
+  xy: 163, 1
+  size: 73, 73
+  orig: 73, 73
+  offset: 0, 0
+  index: -1
+图层_2_副本_3
+  rotate: false
+  xy: 82, 1
+  size: 79, 78
+  orig: 79, 78
+  offset: 0, 0
+  index: -1
+图层_2_副本_4
+  rotate: false
+  xy: 1, 1
+  size: 79, 79
+  orig: 79, 79
+  offset: 0, 0
+  index: -1
+图层_2_副本_6
+  rotate: false
+  xy: 1, 163
+  size: 79, 79
+  orig: 79, 79
+  offset: 0, 0
+  index: -1
+图层_2_副本_5
+  rotate: false
+  xy: 1, 82
+  size: 79, 79
+  orig: 79, 79
+  offset: 0, 0
+  index: -1
