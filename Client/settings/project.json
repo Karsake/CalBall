@@ -2,7 +2,24 @@
   "assets-sort-type": "name",
   "collision-matrix": [
     [
+      false
+    ],
+    [
+      false,
+      false,
       true
+    ],
+    [
+      false,
+      true,
+      false,
+      true
+    ],
+    [
+      false,
+      false,
+      true,
+      false
     ]
   ],
   "design-resolution-height": 1334,
@@ -36,9 +53,12 @@
   "fit-height": true,
   "fit-width": true,
   "group-list": [
-    "default"
+    "default",
+    "wall",
+    "shoot",
+    "panel"
   ],
-  "last-module-event-record-time": 1555831018950,
+  "last-module-event-record-time": 1556884648975,
   "simulator-orientation": false,
   "simulator-resolution": {
     "height": 640,

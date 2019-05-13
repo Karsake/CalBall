@@ -1,5 +1,9 @@
 import {BallScore} from "../Utils/Define";
 class GameConfig{
+    initRoundTime:number = 5;
+    minRoundTime:number = 1;
+    timeRatial:number = 0.9;//与上一轮对比的时间比例
+    initLine:number = 4;
     row:number = 10;
     collumn:number = 8;
     ballSize:number = 80;

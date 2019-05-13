@@ -8,6 +8,10 @@ export default class Preload extends cc.Component {
 
     onLoad () {
         Util.loadSave();
+        
+        cc.director.getPhysicsManager().enabled = true;
+        cc.director.getCollisionManager().enabled = true;
+
         cc.director.loadScene(SCENE_NAME.HOME);
     }
 

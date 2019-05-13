@@ -1,5 +1,6 @@
 import GameConfig from "../Utils/GameConfig";
 import { BallScore, BallColor } from "../Utils/Define";
+import BallController from "../Controller/BallController";
 
 const {ccclass, property} = cc._decorator;
 
@@ -10,15 +11,15 @@ export default class BallData extends cc.Component {
     private _column:number = -1
 
     private _score:BallScore;
-    private _color:BallColor;
     private _isNew:Boolean;
 
     init(row,column,ballNode:cc.Node) {
-        // console.log(row,column,ballNode)
+        // console.log(row,column)//,ballNode)
         if(ballNode instanceof cc.Node) {
             this._row = row;
             this._column = column
             this.node = ballNode;
+            this.score = BallScore.lv0;
         }else{
             throw("bubble init failure")
         }
@@ -26,7 +27,7 @@ export default class BallData extends cc.Component {
     }
 
     setBall() {
-        this.node.setPosition((this._row  * 1  + (this._column % 2) / 2) * GameConfig.ballSize , this._column * GameConfig.heightShift* GameConfig.ballSize);//todo 这玩意需要排版一下
+        this.node.setPosition((this._column  * 1  + (this._row % 2) / 2) * GameConfig.ballSize - 300, this._row * GameConfig.heightShift * GameConfig.ballSize - 270);
     }
 
     /**
@@ -34,9 +35,14 @@ export default class BallData extends cc.Component {
      */
     public set score(x:BallScore) {
         this._score = x;
-        this._color = BallColor[BallScore[x]];
         this._isNew = true;
-        this.node.opacity = this._score == BallScore.lv0 ? 0 : 255;
+        if(BallController.instance.maxBallScore < x) {
+            BallController.instance.maxBallScore = x;
+        }
+        this.node.opacity = this._score == BallScore.lv0 ? 123 : 255;
+        this.node.color = new cc.Color().fromHEX(BallColor[BallScore[x]]);
+        this.node.getChildByName("score").getComponent(cc.Label).string = this._score + "";
+
     }
 
     public clearNew() {
@@ -44,7 +50,17 @@ export default class BallData extends cc.Component {
     }
 
     public ballPush() {
-        this._row += 1;
-        //TODO
+        this._row -= 1;
+        this.node.runAction(cc.moveBy(0.3,cc.v2(0 , - GameConfig.heightShift * GameConfig.ballSize)))
+
+        if(this.node.y < - 150) {
+            //TODO 这里需要加入游戏失败逻辑
+            this._row += GameConfig.row;
+            this.node.y += GameConfig.row * GameConfig.heightShift * GameConfig.ballSize;
+        }
+    }
+
+    public setRandomScore() {
+        this.score = BallController.instance.scorePool[Math.floor(BallController.instance.scorePool.length * Math.random())];
     }
 }

@@ -1,4 +1,5 @@
 import { CLIENT_EVENT } from "../Utils/Define";
+import BallData from "../Entity/BallData";
 
 export default class ScoreController{
 
@@ -18,7 +19,7 @@ export default class ScoreController{
     /**
      * 初始化分数
      */
-    public init() {
+    public resetGame() {
         this.isUpdating = false;
         this.score = 0;
     }
@@ -60,12 +61,5 @@ export default class ScoreController{
     private updateGameScore() {
         cc.director.emit(CLIENT_EVENT.SCORE_UPDATE);
     }
-
-    // onLoad () {}
-
-    start () {
-
-    }
-
-    // update (dt) {}
+ 
 }
