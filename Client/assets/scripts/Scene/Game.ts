@@ -34,6 +34,12 @@ export default class Game extends cc.Component {
     @property(cc.Prefab)
     fallenBall:cc.Prefab = null;
 
+    @property(cc.Node)
+    pauseBtn:cc.Node = null;
+
+    @property(cc.Node)
+    pausePanel:cc.Node = null;
+
     _lastRoundTime = 0;
     _lineDots:cc.NodePool = null;
     _fallenBalls:cc.NodePool = null;
@@ -52,7 +58,7 @@ export default class Game extends cc.Component {
         this.shootingPanel.on(cc.Node.EventType.TOUCH_MOVE,this.getAimLine,this);
         this.shootingPanel.on(cc.Node.EventType.TOUCH_CANCEL,this.clearAimLine,this);
         this.shootingPanel.on(cc.Node.EventType.TOUCH_END,this.clearAimLine,this);
-
+        this.pauseBtn.on(cc.Node.EventType.TOUCH_END,this.pauseGame,this);
     }
 
     onDisable() {
@@ -61,6 +67,7 @@ export default class Game extends cc.Component {
         this.shootingPanel.off(cc.Node.EventType.TOUCH_MOVE,this.getAimLine);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_END,this.clearAimLine);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_CANCEL,this.clearAimLine);
+        this.pauseBtn.off(cc.Node.EventType.TOUCH_END,this.pauseGame,this);
 
     }
     
@@ -93,6 +100,10 @@ export default class Game extends cc.Component {
             this._fallenBalls.put(cc.instantiate(this.fallenBall))
         }
         BallController.instance.isStart = true;
+    }
+
+    pauseGame() {
+        BallController.instance.isStart = false;
     }
 
     getAimLine(info:cc.Event.EventTouch) {
@@ -133,9 +144,9 @@ export default class Game extends cc.Component {
     }
 
     ballPush() {
-        for(let i in BallController.instance.ballGroup) {
-            for(let j in BallController.instance.ballGroup[i]) {
-                BallController.instance.ballGroup[i][j].ballPush();
+        for(let i of BallController.instance.ballGroup) {
+            for(let j of i) {
+                j.ballPush();
             }
         }
     }
