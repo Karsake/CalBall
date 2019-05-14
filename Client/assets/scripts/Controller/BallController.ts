@@ -20,6 +20,7 @@ export default class BallController{
         return this._ballGroup;
     }
 
+    public isStart:boolean = false;
     public maxBallScore:number = 0;
     public minBallScore:number = 0;
     private _scorePool:Array<BallScore> = [];

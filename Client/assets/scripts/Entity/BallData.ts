@@ -60,6 +60,7 @@ export default class BallData extends cc.Component {
                 //TODO 这里需要加入游戏失败逻辑
                 if(this.score!= BallScore.lv0) {
                     console.warn("游戏失败")
+                    BallController.instance.isStart = false;
                 }
                 this._row += GameConfig.row;
                 this.node.y += GameConfig.row * GameConfig.heightShift * GameConfig.ballSize;

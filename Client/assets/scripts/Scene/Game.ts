@@ -78,6 +78,7 @@ export default class Game extends cc.Component {
         while(this._lineDots.size() < 25){
             this._lineDots.put(cc.instantiate(this.dotPrefab))
         }
+        BallController.instance.isStart = true;
     }
 
     getAimLine(info:cc.Event.EventTouch) {
@@ -127,12 +128,14 @@ export default class Game extends cc.Component {
 
     update(dt) {
         // console.log(BallController.instance.roundTime)
-        BallController.instance.roundTime -= dt;
-        if(BallController.instance.roundTime <= 0) {
-            this.ballPush();
-            BallController.instance.gameRound += 1;
-            this._lastRoundTime = Math.max(GameConfig.minRoundTime,this._lastRoundTime * GameConfig.timeRatial);
-            BallController.instance.roundTime += this._lastRoundTime;
+        if(BallController.instance.isStart) {
+            BallController.instance.roundTime -= dt;
+            if(BallController.instance.roundTime <= 0) {
+                this.ballPush();
+                BallController.instance.gameRound += 1;
+                this._lastRoundTime = Math.max(GameConfig.minRoundTime,this._lastRoundTime * GameConfig.timeRatial);
+                BallController.instance.roundTime += this._lastRoundTime;
+            }
         }
     }
 }
