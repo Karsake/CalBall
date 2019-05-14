@@ -35,7 +35,8 @@ export default class Game extends cc.Component {
     fallenBall:cc.Prefab = null;
 
     _lastRoundTime = 0;
-    _lineDots:cc.NodePool = null;;
+    _lineDots:cc.NodePool = null;
+    _fallenBalls:cc.NodePool = null;
 
     start () {
         
@@ -84,6 +85,12 @@ export default class Game extends cc.Component {
         }
         while(this._lineDots.size() < 25){
             this._lineDots.put(cc.instantiate(this.dotPrefab))
+        }
+        if(!this._fallenBalls) {
+            this._fallenBalls = new cc.NodePool();
+        }
+        while(this._fallenBalls.size() < 25){
+            this._fallenBalls.put(cc.instantiate(this.fallenBall))
         }
         BallController.instance.isStart = true;
     }
@@ -135,7 +142,7 @@ export default class Game extends cc.Component {
 
     dropBall(node:cc.Node) {
         node.opacity = 0;
-        let ballNode = cc.instantiate(this.fallenBall);
+        let ballNode = this._fallenBalls.get();
         ballNode.parent = this.fallenNode;
         ballNode.setPosition(node.x,node.y);
         let randX = Math.random();
@@ -151,6 +158,13 @@ export default class Game extends cc.Component {
                 BallController.instance.gameRound += 1;
                 this._lastRoundTime = Math.max(GameConfig.minRoundTime,this._lastRoundTime * GameConfig.timeRatial);
                 BallController.instance.roundTime += this._lastRoundTime;
+            }
+        }
+        if(this.fallenNode.children.length) {
+            for(let i of this.fallenNode.children) {
+                if(i.y < 700) {
+                    this._fallenBalls.put(i);
+                }
             }
         }
     }
