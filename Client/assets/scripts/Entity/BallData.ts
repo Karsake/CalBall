@@ -42,7 +42,6 @@ export default class BallData extends cc.Component {
         this.node.opacity = this._score == BallScore.lv0 ? 123 : 255;
         this.node.color = new cc.Color().fromHEX(BallColor[BallScore[x]]);
         this.node.getChildByName("score").getComponent(cc.Label).string = this._score + "";
-
     }
 
     public clearNew() {
@@ -52,12 +51,18 @@ export default class BallData extends cc.Component {
     public ballPush() {
         this._row -= 1;
         this.node.runAction(cc.moveBy(0.3,cc.v2(0 , - GameConfig.heightShift * GameConfig.ballSize)))
-
-        if(this.node.y < - 150) {
-            //TODO 这里需要加入游戏失败逻辑
-            this._row += GameConfig.row;
-            this.node.y += GameConfig.row * GameConfig.heightShift * GameConfig.ballSize;
+        if(this._row == GameConfig.row - 1) {
+            this.setRandomScore();
         }
+        setTimeout(() => {
+            if(this.node.y < - 150) {
+                //TODO 这里需要加入游戏失败逻辑
+                this._row += GameConfig.row;
+                this.node.y += GameConfig.row * GameConfig.heightShift * GameConfig.ballSize;
+            }
+
+        }, 300);
+
     }
 
     public setRandomScore() {
