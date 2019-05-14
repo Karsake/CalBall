@@ -49,13 +49,14 @@ export default class BallData extends cc.Component {
     }
 
     public ballPush() {
-        this._row -= 1;
-        this.node.runAction(cc.moveBy(0.3,cc.v2(0 , - GameConfig.heightShift * GameConfig.ballSize)))
         if(this._row == GameConfig.row - 1) {
             this.setRandomScore();
         }
+        this._row -= 1;
+        this.node.runAction(cc.moveBy(0.3,cc.v2(0 , - GameConfig.heightShift * GameConfig.ballSize)))
+
         setTimeout(() => {
-            if(this.node.y < - 150) {
+            if(this._row < 0) {
                 //TODO 这里需要加入游戏失败逻辑
                 this._row += GameConfig.row;
                 this.node.y += GameConfig.row * GameConfig.heightShift * GameConfig.ballSize;
