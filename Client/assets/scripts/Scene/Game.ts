@@ -28,8 +28,15 @@ export default class Game extends cc.Component {
     @property(cc.Node)
     dotNode:cc.Node = null;
 
+    @property(cc.Node)
+    fallenNode:cc.Node = null;
+
+    @property(cc.Prefab)
+    fallenBall:cc.Prefab = null;
+
     _lastRoundTime = 0;
-    _lineDots:cc.NodePool;
+    _lineDots:cc.NodePool = null;;
+
     start () {
         
     }
@@ -124,6 +131,15 @@ export default class Game extends cc.Component {
                 BallController.instance.ballGroup[i][j].ballPush();
             }
         }
+    }
+
+    dropBall(node:cc.Node) {
+        node.opacity = 0;
+        let ballNode = cc.instantiate(this.fallenBall);
+        ballNode.parent = this.fallenNode;
+        ballNode.setPosition(node.x,node.y);
+        let randX = Math.random();
+        ballNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(randX,Math.sqrt(1-randX * randX));
     }
 
     update(dt) {
