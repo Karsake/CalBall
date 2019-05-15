@@ -60,10 +60,11 @@ export default class Game extends cc.Component {
 
     onLoad () {
         this.initNewGame();
+        this.scoreLabel.string = "";
     }
 
     onEnable() {
-        cc.director.on(CLIENT_EVENT.SCORE_UPDATE,this.showScore);
+        cc.director.on(CLIENT_EVENT.SCORE_UPDATE,this.showScore,this);
         this.shootingPanel.on(cc.Node.EventType.TOUCH_START,this.getAimLine,this);
         this.shootingPanel.on(cc.Node.EventType.TOUCH_MOVE,this.getAimLine,this);
         this.shootingPanel.on(cc.Node.EventType.TOUCH_CANCEL,this.clearAimLine,this);
@@ -173,6 +174,7 @@ export default class Game extends cc.Component {
     }
 
     showScore() {
+        console.log(123)
         this.scoreLabel.string = `${ScoreController.instance.score}`;
     }
 
