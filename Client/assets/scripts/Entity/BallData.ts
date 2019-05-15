@@ -66,7 +66,6 @@ export default class BallData extends cc.Component {
                 this._row += GameConfig.row;
                 this.node.y += GameConfig.row * GameConfig.heightShift * GameConfig.ballSize;
             }
-
         }, 300);
 
     }
