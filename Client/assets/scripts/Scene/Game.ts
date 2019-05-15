@@ -187,6 +187,7 @@ export default class Game extends cc.Component {
     update(dt) {
         // console.log(BallController.instance.roundTime)
         if(BallController.instance.isStart) {
+            // console.log(BallController.instance.roundTime,this._lastRoundTime)
             BallController.instance.roundTime -= dt;
             this.processBar.progress = BallController.instance.roundTime / this._lastRoundTime;
             if(BallController.instance.roundTime <= 0) {
@@ -196,11 +197,9 @@ export default class Game extends cc.Component {
                 BallController.instance.roundTime += this._lastRoundTime;
             }
         }
-        if(this.fallenNode.children.length) {
-            for(let i of this.fallenNode.children) {
-                if(i.y < 700) {
-                    this._fallenBalls.put(i);
-                }
+        for(let i of this.fallenNode.children) {
+            if(i.y < 700) {
+                this._fallenBalls.put(i);
             }
         }
     }
