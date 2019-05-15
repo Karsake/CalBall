@@ -76,7 +76,7 @@ export default class Game extends cc.Component {
     }
 
     onDisable() {
-        cc.director.off(CLIENT_EVENT.SCORE_UPDATE,this.showScore);
+        cc.director.off(CLIENT_EVENT.SCORE_UPDATE,this.showScore,this);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_START,this.getAimLine);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_MOVE,this.getAimLine);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_END,this.shootBall);
