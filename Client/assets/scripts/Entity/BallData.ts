@@ -49,6 +49,7 @@ export default class BallData extends cc.Component {
     }
 
     public ballPush() {
+        var notZero:boolean = this._score != BallScore.lv0;
         if(this._row == GameConfig.row - 1) {
             this.setRandomScore();
         }
@@ -56,9 +57,9 @@ export default class BallData extends cc.Component {
         this.node.runAction(cc.moveBy(0.3,cc.v2(0 , - GameConfig.heightShift * GameConfig.ballSize)))
 
         setTimeout(() => {
-            if(this._row < 0) {
+            if(this._row == -1) {
                 //TODO 这里需要加入游戏失败逻辑
-                if(this.score!= BallScore.lv0) {
+                if(notZero) {
                     console.warn("游戏失败")
                     BallController.instance.isStart = false;
                 }

@@ -45,7 +45,7 @@ export default class Game extends cc.Component {
 
     @property(cc.ProgressBar)
     processBar:cc.ProgressBar = null;
-    
+
     _lastRoundTime = 0;
     _lineDots:cc.NodePool = null;
     _fallenBalls:cc.NodePool = null;
@@ -188,6 +188,7 @@ export default class Game extends cc.Component {
         // console.log(BallController.instance.roundTime)
         if(BallController.instance.isStart) {
             BallController.instance.roundTime -= dt;
+            this.processBar.progress = BallController.instance.roundTime / this._lastRoundTime;
             if(BallController.instance.roundTime <= 0) {
                 this.ballPush();
                 BallController.instance.gameRound += 1;
