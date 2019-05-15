@@ -43,6 +43,9 @@ export default class Game extends cc.Component {
     @property(cc.Node)
     pausePanel:cc.Node = null;
 
+    @property(cc.ProgressBar)
+    processBar:cc.ProgressBar = null;
+    
     _lastRoundTime = 0;
     _lineDots:cc.NodePool = null;
     _fallenBalls:cc.NodePool = null;
