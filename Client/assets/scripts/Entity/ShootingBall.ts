@@ -14,6 +14,7 @@ export default class ShootingBall extends cc.Component {
     }
 
     reset() {
+        BallController.instance.isShooting = false;
         this.node.setPosition(0,-380);
         this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
         this._score = BallController.instance.scorePool[Math.floor(BallController.instance.scorePool.length * Math.random())];

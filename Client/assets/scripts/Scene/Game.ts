@@ -46,6 +46,9 @@ export default class Game extends cc.Component {
     @property(cc.ProgressBar)
     processBar:cc.ProgressBar = null;
 
+    @property(cc.Label)
+    scoreLabel:cc.Label = null;
+
     _lastRoundTime = 0;
     _lineDots:cc.NodePool = null;
     _fallenBalls:cc.NodePool = null;
@@ -134,6 +137,10 @@ export default class Game extends cc.Component {
         let distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         let unitX = deltaX / distance * 50;
         let unitY = deltaY / distance * 50;
+        if(unitY < 10) {
+            //角度过小的情况下取消发射
+            return
+        }
         while(this._lineDots.size() > 0) {
             let x = this._lineDots.get();
             this.dotNode.addChild(x);
@@ -151,7 +158,10 @@ export default class Game extends cc.Component {
     }
 
     shootBall() {
-        this.shootingBallNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(this._xVelocity,this._yVelocity);
+        if(BallController.instance.isStart) {
+            BallController.instance.isShooting = true;
+            this.shootingBallNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(this._xVelocity,this._yVelocity);
+        }
         this.clearAimLine();
     }
     clearAimLine() {
@@ -163,7 +173,7 @@ export default class Game extends cc.Component {
     }
 
     showScore() {
-        ScoreController.instance.score;
+        this.scoreLabel.string = `${ScoreController.instance.score}`;
     }
 
     ballPush() {
@@ -186,7 +196,7 @@ export default class Game extends cc.Component {
 
     update(dt) {
         // console.log(BallController.instance.roundTime)
-        if(BallController.instance.isStart) {
+        if(BallController.instance.isStart && !BallController.instance.isShooting) {
             // console.log(BallController.instance.roundTime,this._lastRoundTime)
             BallController.instance.roundTime -= dt;
             this.processBar.progress = BallController.instance.roundTime / this._lastRoundTime;

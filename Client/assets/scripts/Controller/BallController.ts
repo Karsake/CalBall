@@ -21,6 +21,7 @@ export default class BallController{
     }
 
     public isStart:boolean = false;
+    public isShooting:boolean = false;
     public maxBallScore:number = 0;
     public minBallScore:number = 0;
     private _scorePool:Array<BallScore> = [];
