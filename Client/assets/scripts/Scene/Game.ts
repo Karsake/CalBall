@@ -38,12 +38,16 @@ export default class Game extends cc.Component {
     pauseBtn:cc.Node = null;
 
     @property(cc.Node)
+    resumeBtn:cc.Node = null;
+
+    @property(cc.Node)
     pausePanel:cc.Node = null;
 
     _lastRoundTime = 0;
     _lineDots:cc.NodePool = null;
     _fallenBalls:cc.NodePool = null;
-
+    _xVelocity:number;
+    _yVelocity:number;
     start () {
         
     }
@@ -57,17 +61,21 @@ export default class Game extends cc.Component {
         this.shootingPanel.on(cc.Node.EventType.TOUCH_START,this.getAimLine,this);
         this.shootingPanel.on(cc.Node.EventType.TOUCH_MOVE,this.getAimLine,this);
         this.shootingPanel.on(cc.Node.EventType.TOUCH_CANCEL,this.clearAimLine,this);
-        this.shootingPanel.on(cc.Node.EventType.TOUCH_END,this.clearAimLine,this);
+        this.shootingPanel.on(cc.Node.EventType.TOUCH_END,this.shootBall,this);
         this.pauseBtn.on(cc.Node.EventType.TOUCH_END,this.pauseGame,this);
+        this.resumeBtn.on(cc.Node.EventType.TOUCH_END,this.resumeGame,this);
+
+        
     }
 
     onDisable() {
         cc.director.off(CLIENT_EVENT.SCORE_UPDATE,this.showScore);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_START,this.getAimLine);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_MOVE,this.getAimLine);
-        this.shootingPanel.off(cc.Node.EventType.TOUCH_END,this.clearAimLine);
+        this.shootingPanel.off(cc.Node.EventType.TOUCH_END,this.shootBall);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_CANCEL,this.clearAimLine);
         this.pauseBtn.off(cc.Node.EventType.TOUCH_END,this.pauseGame,this);
+        this.resumeBtn.off(cc.Node.EventType.TOUCH_END,this.resumeGame,this);
 
     }
     
@@ -104,6 +112,12 @@ export default class Game extends cc.Component {
 
     pauseGame() {
         BallController.instance.isStart = false;
+        this.pausePanel.active = true;
+    }
+
+    resumeGame() {
+        BallController.instance.isStart = true;
+        this.pausePanel.active = false;
     }
 
     getAimLine(info:cc.Event.EventTouch) {
@@ -129,14 +143,20 @@ export default class Game extends cc.Component {
             x.setPosition(posX,this._lineDots.size() * unitY - 380);
 
         }
-        console.log(unitX,unitY)
+        this._xVelocity = deltaX *  80;
+        this._yVelocity = deltaY * 80;
     }
 
+    shootBall() {
+        this.shootingBallNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(this._xVelocity,this._yVelocity);
+        this.clearAimLine();
+    }
     clearAimLine() {
         while(this.dotNode.children.length) {
             this._lineDots.put(this.dotNode.children[0])
         }
-        console.log("清除线条")
+        this._xVelocity = 0;
+        this._yVelocity = 0;
     }
 
     showScore() {
