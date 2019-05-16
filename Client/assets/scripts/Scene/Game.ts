@@ -1,6 +1,6 @@
 import ScoreController from "../Controller/ScoreController";
 import Config from "../Utils/GameConfig";
-import { CLIENT_EVENT } from "../Utils/Define";
+import { CLIENT_EVENT, BallScore } from "../Utils/Define";
 import BallController from "../Controller/BallController";
 import BallData from "../Entity/BallData";
 import GameConfig from "../Utils/GameConfig";
@@ -156,6 +156,9 @@ export default class Game extends cc.Component {
         }
         this._xVelocity = deltaX *  80;
         this._yVelocity = deltaY * 80;
+        if(BallController.instance.aimBall) {
+            BallController.instance.aimBall.node[`ballData`].score = BallScore.lv11
+        }
     }
 
     shootBall() {
@@ -166,6 +169,7 @@ export default class Game extends cc.Component {
         this.clearAimLine();
     }
     clearAimLine() {
+        BallController.instance.isAimBallSet = false;
         while(this.dotNode.children.length) {
             this._lineDots.put(this.dotNode.children[0])
         }
@@ -174,7 +178,6 @@ export default class Game extends cc.Component {
     }
 
     showScore() {
-        console.log(123)
         this.scoreLabel.string = `${ScoreController.instance.score}`;
     }
 

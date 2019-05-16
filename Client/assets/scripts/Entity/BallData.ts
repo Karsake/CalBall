@@ -44,6 +44,10 @@ export default class BallData extends cc.Component {
         this.node.getChildByName("score").getComponent(cc.Label).string = this._score + "";
     }
 
+    public get score():BallScore {
+        return this._score
+    }
+
     public clearNew() {
         this._isNew = false;
     }
@@ -58,9 +62,8 @@ export default class BallData extends cc.Component {
 
         setTimeout(() => {
             if(this._row == -1) {
-                //TODO 这里需要加入游戏失败逻辑
                 if(notZero) {
-                    console.warn("游戏失败")
+                    console.warn("GameOver")
                     BallController.instance.isStart = false;
                 }
                 this._row += GameConfig.row;

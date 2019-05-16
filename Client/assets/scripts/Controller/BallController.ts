@@ -27,10 +27,14 @@ export default class BallController{
     private _scorePool:Array<BallScore> = [];
     public gameRound:number = 0;
     public roundTime:number = 0;
+    public aimBall:BallData = null;
+    public isAimBallSet:boolean = false;
 
     public resetGame() {
         this._ballGroup = [];
         this.gameRound = 0;
+        this.aimBall = null;
+        this.isAimBallSet = false;
         this.roundTime = GameConfig.initRoundTime;
         this.maxBallScore = GameConfig.initMax;
         this.minBallScore = GameConfig.initMin;
