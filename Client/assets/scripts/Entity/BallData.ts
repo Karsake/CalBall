@@ -66,6 +66,7 @@ export default class BallData extends cc.Component {
     public ballPush() {
         var notZero:boolean = this._score != BallScore.lv0;
         if(this._row == GameConfig.row - 1) {
+            this._isTarget = false;
             this.setRandomScore();
         }
         this._row -= 1;
