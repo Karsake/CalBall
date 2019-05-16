@@ -156,14 +156,15 @@ export default class Game extends cc.Component {
                 break;
             }
             x.setPosition(posX,this._lineDots.size() * unitY - 380);
-
         }
         this._xVelocity = deltaX *  80;
         this._yVelocity = deltaY * 80;
         if(BallController.instance.aimBall) {
             BallController.instance.aimBall.node[`ballData`].score = BallController.instance.shootingScore;
             BallController.instance.aimBall.node[`ballData`].isTarget = true;
+
         }
+        console.log(!!BallController.instance.aimBall)
     }
 
     shootBall() {
@@ -176,9 +177,9 @@ export default class Game extends cc.Component {
     clearAimLine() {
         if(BallController.instance.aimBall) {
             BallController.instance.aimBall.node[`ballData`].isTarget = false;
+            BallController.instance.aimBall = null;
         }
         BallController.instance.isAimBallSet = false;
-        BallController.instance.aimBall = null;
         while(this.dotNode.children.length) {
             this._lineDots.put(this.dotNode.children[0])
         }

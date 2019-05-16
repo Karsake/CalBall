@@ -30,7 +30,7 @@ export default class BallController{
     public aimBall:BallData = null;
     public isAimBallSet:boolean = false;
     public shootingScore:BallScore = BallScore.lv0;
-    
+
     public resetGame() {
         this._ballGroup = [];
         this.gameRound = 0;
