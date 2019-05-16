@@ -151,14 +151,18 @@ export default class Game extends cc.Component {
             }else if(posX < - 300) {
                 posX = - 600 - posX;
             }
-            BallController.instance.checkAimBall(x)
+            if(BallController.instance.checkAimBall(x)) {
+                this._lineDots.put(x);
+                break;
+            }
             x.setPosition(posX,this._lineDots.size() * unitY - 380);
 
         }
         this._xVelocity = deltaX *  80;
         this._yVelocity = deltaY * 80;
         if(BallController.instance.aimBall) {
-            BallController.instance.aimBall.node[`ballData`].score = BallScore.lv11
+            BallController.instance.aimBall.node[`ballData`].score = BallController.instance.shootingScore;
+            BallController.instance.aimBall.node[`ballData`].isTarget = true;
         }
     }
 
@@ -170,7 +174,11 @@ export default class Game extends cc.Component {
         this.clearAimLine();
     }
     clearAimLine() {
+        if(BallController.instance.aimBall) {
+            BallController.instance.aimBall.node[`ballData`].isTarget = false;
+        }
         BallController.instance.isAimBallSet = false;
+        BallController.instance.aimBall = null;
         while(this.dotNode.children.length) {
             this._lineDots.put(this.dotNode.children[0])
         }

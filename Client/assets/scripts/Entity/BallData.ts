@@ -12,6 +12,7 @@ export default class BallData extends cc.Component {
 
     private _score:BallScore;
     private _isNew:Boolean;
+    private _isTarget:Boolean;
 
     init(row,column,ballNode:cc.Node) {
         // console.log(row,column)//,ballNode)
@@ -39,7 +40,7 @@ export default class BallData extends cc.Component {
         if(BallController.instance.maxBallScore < x) {
             BallController.instance.maxBallScore = x;
         }
-        this.node.opacity = this._score == BallScore.lv0 ? 123 : 255;
+        this.node.opacity = this._score == BallScore.lv0 ? 0 : 255;
         this.node.color = new cc.Color().fromHEX(BallColor[BallScore[x]]);
         this.node.getChildByName("score").getComponent(cc.Label).string = this._score + "";
     }
@@ -48,8 +49,18 @@ export default class BallData extends cc.Component {
         return this._score
     }
 
+    public set isTarget(x:boolean) {
+        this._isTarget = x;
+        if(this._isTarget){
+            this.node.opacity = 123;
+        }else{
+            this.score = BallScore.lv0;
+        }
+    }
+
     public clearNew() {
         this._isNew = false;
+        this._isTarget = false;
     }
 
     public ballPush() {
@@ -62,7 +73,7 @@ export default class BallData extends cc.Component {
 
         setTimeout(() => {
             if(this._row == -1) {
-                if(notZero) {
+                if(notZero && !this._isTarget) {
                     console.warn("GameOver")
                     BallController.instance.isStart = false;
                 }

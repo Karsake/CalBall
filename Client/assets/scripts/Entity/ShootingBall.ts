@@ -18,6 +18,7 @@ export default class ShootingBall extends cc.Component {
         this.node.setPosition(0,-380);
         this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
         this._score = BallController.instance.scorePool[Math.floor(BallController.instance.scorePool.length * Math.random())];
+        BallController.instance.shootingScore = this._score;
         this.node.getChildByName("score").getComponent(cc.Label).string = this._score + "";
         this.node.color = new cc.Color().fromHEX(BallColor[BallScore[this._score]]);
 

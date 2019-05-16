@@ -29,7 +29,8 @@ export default class BallController{
     public roundTime:number = 0;
     public aimBall:BallData = null;
     public isAimBallSet:boolean = false;
-
+    public shootingScore:BallScore = BallScore.lv0;
+    
     public resetGame() {
         this._ballGroup = [];
         this.gameRound = 0;
@@ -77,13 +78,13 @@ export default class BallController{
         this._ballGroup
     }
 
-    checkAimBall(dotNode:cc.Node):void {
+    checkAimBall(dotNode:cc.Node):boolean {
         if(this.aimBall) {
-            return
+            return true
         }
         for(let i of this._ballGroup) {
             for(let j of i) {
-                if(Math.sqrt(Math.pow(dotNode.x - dotNode.x,2) + Math.pow(dotNode.x - dotNode.x,2)) < 30) {
+                if(j.score == 0 && Math.sqrt(Math.pow(dotNode.x - j.node.x,2) + Math.pow(dotNode.y - j.node.y,2)) < 30) {
                     this.aimBall = j;
                 }
             }
