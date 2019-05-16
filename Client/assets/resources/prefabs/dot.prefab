@@ -24,13 +24,10 @@
       },
       {
         "__id__": 3
-      },
-      {
-        "__id__": 4
       }
     ],
     "_prefab": {
-      "__id__": 5
+      "__id__": 4
     },
     "_opacity": 255,
     "_color": {
@@ -119,16 +116,6 @@
       "y": 0
     },
     "_radius": 10,
-    "_id": ""
-  },
-  {
-    "__type__": "3ec22SQfnBDubvaYgYjzC+b",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
     "_id": ""
   },
   {

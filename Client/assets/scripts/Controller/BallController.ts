@@ -70,11 +70,23 @@ export default class BallController{
      */
     getSurroundedBalls(data:BallData,isSameScore:boolean = false,layer:number = 1):Array<BallData> {
         let a:Array<BallData> = [];
-
         return a
     }
 
     getUnattachedBalls() {
         this._ballGroup
+    }
+
+    checkAimBall(dotNode:cc.Node):void {
+        if(this.aimBall) {
+            return
+        }
+        for(let i of this._ballGroup) {
+            for(let j of i) {
+                if(Math.sqrt(Math.pow(dotNode.x - dotNode.x,2) + Math.pow(dotNode.x - dotNode.x,2)) < 30) {
+                    this.aimBall = j;
+                }
+            }
+        }
     }
 }

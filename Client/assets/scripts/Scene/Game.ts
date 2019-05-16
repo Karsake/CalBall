@@ -151,6 +151,7 @@ export default class Game extends cc.Component {
             }else if(posX < - 300) {
                 posX = - 600 - posX;
             }
+            BallController.instance.checkAimBall(x)
             x.setPosition(posX,this._lineDots.size() * unitY - 380);
 
         }
