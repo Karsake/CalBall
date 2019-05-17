@@ -190,7 +190,7 @@ export default class Game extends cc.Component {
         this.clearAimLine();
     }
     clearAimLine() {
-        if(BallController.instance.aimBall) {
+        if(BallController.instance.aimBall && !BallController.instance.isShooting) {
             BallController.instance.aimBall.node[`ballData`].isTarget = false;
             BallController.instance.aimBall = null;
         }

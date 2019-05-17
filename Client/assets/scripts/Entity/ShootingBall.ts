@@ -9,8 +9,13 @@ export default class ShootingBall extends cc.Component {
 
     _score:BallScore;
     onCollisionEnter(other,self) {
-        console.log(other.node.ballData);
-        this.reset();
+        if(other.node.ballData.isTarget) {
+            if(BallController.instance.aimBall && !BallController.instance.isShooting) {
+                BallController.instance.aimBall.node[`ballData`].isTarget = false;
+                BallController.instance.aimBall = null;
+            }
+            this.reset();
+        }
     }
 
     reset() {
@@ -21,7 +26,6 @@ export default class ShootingBall extends cc.Component {
         BallController.instance.shootingScore = this._score;
         this.node.getChildByName("score").getComponent(cc.Label).string = this._score + "";
         this.node.color = new cc.Color().fromHEX(BallColor[BallScore[this._score]]);
-
     }
 
     onLoad() {
