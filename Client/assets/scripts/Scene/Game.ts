@@ -49,9 +49,13 @@ export default class Game extends cc.Component {
     @property(cc.Label)
     scoreLabel:cc.Label = null;
 
+    @property(cc.Node)
+    btnReset:cc.Node = null;
+
     _lastRoundTime = 0;
-    _lineDots:cc.NodePool = null;
-    _fallenBalls:cc.NodePool = null;
+    _lineDotsPool:cc.NodePool = null;
+    _fallenBallsPool:cc.NodePool = null;
+    _sceneBallsPool:cc.NodePool = null;
     _xVelocity:number;
     _yVelocity:number;
     start () {
@@ -71,8 +75,7 @@ export default class Game extends cc.Component {
         this.shootingPanel.on(cc.Node.EventType.TOUCH_END,this.shootBall,this);
         this.pauseBtn.on(cc.Node.EventType.TOUCH_END,this.pauseGame,this);
         this.resumeBtn.on(cc.Node.EventType.TOUCH_END,this.resumeGame,this);
-
-        
+        this.btnReset.on(cc.Node.EventType.TOUCH_END,this.initNewGame,this);
     }
 
     onDisable() {
@@ -83,17 +86,30 @@ export default class Game extends cc.Component {
         this.shootingPanel.off(cc.Node.EventType.TOUCH_CANCEL,this.clearAimLine);
         this.pauseBtn.off(cc.Node.EventType.TOUCH_END,this.pauseGame,this);
         this.resumeBtn.off(cc.Node.EventType.TOUCH_END,this.resumeGame,this);
+        this.btnReset.off(cc.Node.EventType.TOUCH_END,this.initNewGame,this);
 
     }
     
 
     initNewGame() {
+        if(!this._sceneBallsPool) {
+            this._sceneBallsPool = new cc.NodePool();
+        }
+        if(this.ballPanelNode.children.length) {
+            for(let i of this.ballPanelNode.children) {
+                this._sceneBallsPool.put(i);
+            }
+        }
+        this.ballPanelNode.destroyAllChildren();
+        while(this._sceneBallsPool.size() < GameConfig.collumn * GameConfig.row) {
+            this._sceneBallsPool.put(cc.instantiate(this.ballPrefab))
+        }
         ScoreController.instance.resetGame();
         BallController.instance.resetGame();
         this._lastRoundTime = BallController.instance.roundTime;
         for(let i:number = 0;i < BallController.instance.ballGroup.length; i ++) {
             for(let j:number = 0; j < BallController.instance.ballGroup[i].length; j ++) {
-                var x:cc.Node = cc.instantiate(this.ballPrefab);
+                var x:cc.Node = this._sceneBallsPool.get();
                 x.parent = this.ballPanelNode;
                 BallController.instance.ballGroup[i][j].init(i,j,x);
                 x.attr({ballData:BallController.instance.ballGroup[i][j]})
@@ -102,17 +118,17 @@ export default class Game extends cc.Component {
                 }
             }
         }
-        if(!this._lineDots) {
-            this._lineDots = new cc.NodePool();
+        if(!this._lineDotsPool) {
+            this._lineDotsPool = new cc.NodePool();
         }
-        while(this._lineDots.size() < 25){
-            this._lineDots.put(cc.instantiate(this.dotPrefab))
+        while(this._lineDotsPool.size() < 25){
+            this._lineDotsPool.put(cc.instantiate(this.dotPrefab))
         }
-        if(!this._fallenBalls) {
-            this._fallenBalls = new cc.NodePool();
+        if(!this._fallenBallsPool) {
+            this._fallenBallsPool = new cc.NodePool();
         }
-        while(this._fallenBalls.size() < 25){
-            this._fallenBalls.put(cc.instantiate(this.fallenBall))
+        while(this._fallenBallsPool.size() < 25){
+            this._fallenBallsPool.put(cc.instantiate(this.fallenBall))
         }
         BallController.instance.isStart = true;
     }
@@ -142,20 +158,20 @@ export default class Game extends cc.Component {
             //角度过小的情况下取消发射
             return
         }
-        while(this._lineDots.size() > 0) {
-            let x = this._lineDots.get();
+        while(this._lineDotsPool.size() > 0) {
+            let x = this._lineDotsPool.get();
             this.dotNode.addChild(x);
-            let posX = this._lineDots.size() * unitX;
+            let posX = this._lineDotsPool.size() * unitX;
             if(posX > 300) {
                 posX = 600 - posX;
             }else if(posX < - 300) {
                 posX = - 600 - posX;
             }
             if(BallController.instance.checkAimBall(x)) {
-                this._lineDots.put(x);
+                this._lineDotsPool.put(x);
                 break;
             }
-            x.setPosition(posX,this._lineDots.size() * unitY - 380);
+            x.setPosition(posX,this._lineDotsPool.size() * unitY - 380);
         }
         this._xVelocity = deltaX *  80;
         this._yVelocity = deltaY * 80;
@@ -164,7 +180,6 @@ export default class Game extends cc.Component {
             BallController.instance.aimBall.node[`ballData`].isTarget = true;
 
         }
-        console.log(!!BallController.instance.aimBall)
     }
 
     shootBall() {
@@ -181,7 +196,7 @@ export default class Game extends cc.Component {
         }
         BallController.instance.isAimBallSet = false;
         while(this.dotNode.children.length) {
-            this._lineDots.put(this.dotNode.children[0])
+            this._lineDotsPool.put(this.dotNode.children[0])
         }
         this._xVelocity = 0;
         this._yVelocity = 0;
@@ -201,7 +216,7 @@ export default class Game extends cc.Component {
 
     dropBall(node:cc.Node) {
         node.opacity = 0;
-        let ballNode = this._fallenBalls.get();
+        let ballNode = this._fallenBallsPool.get();
         ballNode.parent = this.fallenNode;
         ballNode.setPosition(node.x,node.y);
         let randX = Math.random();
@@ -224,7 +239,7 @@ export default class Game extends cc.Component {
         }
         for(let i of this.fallenNode.children) {
             if(i.y < 700) {
-                this._fallenBalls.put(i);
+                this._fallenBallsPool.put(i);
             }
         }
     }

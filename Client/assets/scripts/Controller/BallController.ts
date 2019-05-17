@@ -79,6 +79,7 @@ export default class BallController{
     }
 
     checkAimBall(dotNode:cc.Node):boolean {
+        console.log(!!this.aimBall)
         if(this.aimBall) {
             return true
         }

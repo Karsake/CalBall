@@ -33,8 +33,6 @@
   "design-resolution-height": 1334,
   "design-resolution-width": 750,
   "excluded-modules": [
-    "Mask",
-    "Graphics",
     "ParticleSystem",
     "TiledMap",
     "Spine Skeleton",
@@ -45,8 +43,7 @@
     "ScrollView",
     "Toggle",
     "Layout",
-    "Animation",
-    "NodePool"
+    "Animation"
   ],
   "facebook": {
     "appID": "",
