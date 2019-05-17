@@ -69,10 +69,10 @@ export default class BallData extends cc.Component {
             this._isTarget = false;
             this.setRandomScore();
         }
-        this._row -= 1;
         this.node.runAction(cc.moveBy(0.3,cc.v2(0 , - GameConfig.heightShift * GameConfig.ballSize)))
 
         setTimeout(() => {
+            this._row -= 1;
             if(this._row == -1) {
                 if(notZero && !this._isTarget) {
                     console.warn("GameOver")
@@ -87,5 +87,9 @@ export default class BallData extends cc.Component {
 
     public setRandomScore() {
         this.score = BallController.instance.scorePool[Math.floor(BallController.instance.scorePool.length * Math.random())];
+    }
+
+    public get row():number{
+        return this._row
     }
 }
