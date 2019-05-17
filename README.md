@@ -6,6 +6,3 @@
 
 #### Software Architecture
 cocos creator 2.0.9/typescript
-
-#### Liscence
-WTFPL
