@@ -181,11 +181,13 @@ export default class Game extends cc.Component {
     }
 
     shootBall() {
-        if(BallController.instance.isStart) {
-            BallController.instance.isShooting = true;
-            this.shootingBallNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(this._xVelocity,this._yVelocity);
+        if(!BallController.instance.isShooting) {
+            if(BallController.instance.isStart && BallController.instance.aimBall) {
+                BallController.instance.isShooting = true;
+                this.shootingBallNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(this._xVelocity,this._yVelocity);
+            }
+            this.clearAimLine();
         }
-        this.clearAimLine();
     }
 
     clearAimLine() {

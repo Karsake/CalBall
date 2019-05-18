@@ -119,6 +119,16 @@ export default class BallController{
         }
     }
 
+    isAttached(data:BallData):Boolean {
+        let a:Array<BallData> = this.getBallsByLayer([data]);
+        for(let i of a) {
+            if(i.row == GameConfig.row - 1) {
+                return true
+            }
+        }
+        return false
+    }
+
     getUnattachedBalls() {
         this._ballGroup
     }
