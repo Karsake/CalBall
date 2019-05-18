@@ -83,12 +83,12 @@ export default class BallController{
     }
 
     setAimBall() {
-        // let x = this.getBallsByLayer([BallController.instance.aimBall],true);
-        console.log(BallController.instance.aimBall.score)
-        let x = this.getSurroundedBalls(BallController.instance.aimBall,true);
-        for(let i of x){
-            console.log(this.isNext(BallController.instance.aimBall,i),BallController.instance.aimBall.row,i.row)
-        }
+        let x = this.getBallsByLayer([BallController.instance.aimBall],true,-1);
+        // let x = this.getSurroundedBalls(BallController.instance.aimBall,true);
+        // for(let i of x){
+        //     console.log(this.isNext(BallController.instance.aimBall,i),BallController.instance.aimBall.row,i.row)
+        // }
+        console.log(x)
 
         cc.director.emit(CLIENT_EVENT.RESET_BALL);
     }
@@ -115,21 +115,20 @@ export default class BallController{
         if(layer == 0) {
             return data
         }
-        let a:Array<BallData> = [];
+        let a:Array<BallData> = data;
         let temp:Array<BallData>;
         for(let i of data) {
-            temp = this.getSurroundedBalls(i,isSameScore).concat(data);
+            temp = this.getSurroundedBalls(i,isSameScore);
             for(let j of temp){
                 if(a.indexOf(j) == -1) {
                     a.push(j);
                 }
             }
         }
-        layer -= 1;
-        if(data == a) {
+        if(data.length == a.length) {
             return a;
         }else {
-            return this.getBallsByLayer(a,isSameScore,layer)
+            return this.getBallsByLayer(a,isSameScore,layer - 1)
         }
     }
 
