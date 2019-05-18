@@ -83,21 +83,27 @@ export default class BallController{
     }
 
     setAimBall() {
-        BallController.instance.aimBall.setNew();
+        // let x = this.getBallsByLayer([BallController.instance.aimBall],true);
+        console.log(BallController.instance.aimBall.score)
+        let x = this.getSurroundedBalls(BallController.instance.aimBall,true);
+        for(let i of x){
+            console.log(this.isNext(BallController.instance.aimBall,i),BallController.instance.aimBall.row,i.row)
+        }
+
         cc.director.emit(CLIENT_EVENT.RESET_BALL);
     }
 
     isNext(data1:BallData,data2:BallData):Boolean {
-        return data1 != data2 &&
-        Math.abs(data1.column - data2.column) < 1 &&
-        Math.abs(data1.row - data2.row) < 1 &&
-        (data1.row % 2 ? data1.column <= data2.column : data2.column <= data1.column)
+        return data1 != data2 && 
+            Math.abs(data1.column - data2.column) <= 1 && 
+            Math.abs(data1.row - data2.row) <= 1 &&
+            (data1.row % 2 ? data1.column <= data2.column : data2.column <= data1.column)
     }
         
     getSurroundedBalls(data:BallData,isSameScore:Boolean = false):Array<BallData> {
         let a:Array<BallData> = []
         for(let i of this._ballGroup) {
-            a.concat(i.filter((x)=>{return this.isNext(data,x) && (!isSameScore || data.score == x.score)}))
+            a = a.concat(i.filter((x)=>{return this.isNext(data,x) && (!isSameScore || data.score == x.score && data.score != BallScore.lv0)}));
         }
         return a
     }
@@ -112,7 +118,7 @@ export default class BallController{
         let a:Array<BallData> = [];
         let temp:Array<BallData>;
         for(let i of data) {
-            temp = this.getSurroundedBalls(i,isSameScore);
+            temp = this.getSurroundedBalls(i,isSameScore).concat(data);
             for(let j of temp){
                 if(a.indexOf(j) == -1) {
                     a.push(j);

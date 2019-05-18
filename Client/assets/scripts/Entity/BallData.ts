@@ -60,14 +60,7 @@ export default class BallData extends cc.Component {
     public get isTarget():Boolean {
         return this._isTarget
     }
-
-    public clearNew() {
-        this._isNew = false;
-    }
-
-    public setNew() {
-        this._isNew = true;
-    }
+    
     public ballPush() {
         var notZero:boolean = this._score != BallScore.lv0;
         if(this._row == GameConfig.row - 1) {

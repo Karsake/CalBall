@@ -11,20 +11,14 @@ export default class ShootingBall extends cc.Component {
     onCollisionEnter(other,self) {
         if(other.node.ballData.isTarget) {
             if(BallController.instance.aimBall && BallController.instance.isShooting) {
-                let tempScore:number = BallController.instance.aimBall.score;
                 BallController.instance.aimBall.node[`ballData`].isTarget = false;
-                BallController.instance.aimBall.score = tempScore;
+                BallController.instance.aimBall.score = BallController.instance.shootingScore;
                 BallController.instance.setAimBall();
             }
         }
     }
 
     reset() {
-        for(let i of BallController.instance.ballGroup) {
-            for(let j of i) {
-                j.clearNew();
-            }
-        }
         BallController.instance.isShooting = false;
         BallController.instance.aimBall = null;
         this.node.setPosition(0,-380);
