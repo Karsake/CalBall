@@ -49,7 +49,7 @@ export default class BallData extends cc.Component {
         return this._score
     }
 
-    public set isTarget(x:boolean) {
+    public set isTarget(x:Boolean) {
         this._isTarget = x;
         if(this._isTarget){
             this.node.opacity = 123;
@@ -58,6 +58,10 @@ export default class BallData extends cc.Component {
         }
     }
 
+    public get isTarget():Boolean {
+        return this._isTarget
+    }
+    
     public clearNew() {
         this._isNew = false;
         this._isTarget = false;

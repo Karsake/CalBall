@@ -10,7 +10,7 @@ export default class ShootingBall extends cc.Component {
     _score:BallScore;
     onCollisionEnter(other,self) {
         if(other.node.ballData.isTarget) {
-            if(BallController.instance.aimBall && !BallController.instance.isShooting) {
+            if(BallController.instance.aimBall && BallController.instance.isShooting) {
                 let tempScore:number = BallController.instance.aimBall.score;
                 BallController.instance.aimBall.node[`ballData`].isTarget = false;
                 BallController.instance.aimBall.score = tempScore;
@@ -21,6 +21,7 @@ export default class ShootingBall extends cc.Component {
 
     reset() {
         BallController.instance.isShooting = false;
+        BallController.instance.aimBall = null;
         this.node.setPosition(0,-380);
         this.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
         this._score = BallController.instance.scorePool[Math.floor(BallController.instance.scorePool.length * Math.random())];
