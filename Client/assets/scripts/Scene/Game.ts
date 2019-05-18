@@ -167,10 +167,8 @@ export default class Game extends cc.Component {
             }else if(posX < - 300) {
                 posX = - 600 - posX;
             }
-            if(BallController.instance.checkAimBall(x)) {
-                this._lineDotsPool.put(x);
-                break;
-            }
+            !BallController.instance.isShooting && BallController.instance.checkAimBall(x);
+ 
             x.setPosition(posX,this._lineDotsPool.size() * unitY - 380);
         }
         this._xVelocity = deltaX *  80;

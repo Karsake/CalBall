@@ -78,16 +78,16 @@ export default class BallController{
         this._ballGroup
     }
 
-    checkAimBall(dotNode:cc.Node):boolean {
-        if(this.aimBall && this.aimBall.score != 0) {
-            console.log(this.aimBall.row)
-            return true
-        }
+    checkAimBall(dotNode:cc.Node):void {
         for(let i of this._ballGroup) {
             for(let j of i) {
                 if(j.score == 0 && j.row < GameConfig.row - 1 && Math.sqrt(Math.pow(dotNode.x - j.node.x,2) + Math.pow(dotNode.y - j.node.y,2)) < 40) {
                     // console.log(`${dotNode.x},${dotNode.y},${j.node.x},${j.node.y}`)
-                    this.aimBall = j;
+                    if(!this.aimBall || this.aimBall.score == 0) {
+                        this.aimBall = null;
+                        this.aimBall = j;
+                    }
+                    
                     // console.log(this.aimBall.row)
                 }
             }
