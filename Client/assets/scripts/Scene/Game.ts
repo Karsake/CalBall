@@ -229,7 +229,7 @@ export default class Game extends cc.Component {
         ballNode.getChildByName("score").getComponent(cc.Label).string = `${data.score}`;
         let randX = Math.random();
         let randY = Math.sqrt(1 - randX * randX);
-        ballNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(200 - randX * 400,randY * 200);
+        ballNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(400 - randX * 800,randY * 200);
     }
 
     update(dt) {
