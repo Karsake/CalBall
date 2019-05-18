@@ -224,6 +224,8 @@ export default class Game extends cc.Component {
         let ballNode = this._fallenBallsPool.get();
         ballNode.parent = this.fallenNode;
         ballNode.setPosition(data.node.x,data.node.y);
+        ballNode.color = data.node.color;
+        ballNode.getChildByName("score").getComponent(cc.Label).string = `${data.score}`;
         let randX = Math.random();
         let randY = Math.sqrt(1 - randX * randX);
         ballNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(randX * 50,randY * 50);
