@@ -86,7 +86,7 @@ export default class BallController{
         (data1.row % 2 ? data1.column <= data2.column : data2.column <= data1.column)
     }
         
-    getSurroundedBalls(data:BallData,isSameScore:boolean = false):Array<BallData> {
+    getSurroundedBalls(data:BallData,isSameScore:Boolean = false):Array<BallData> {
         let a:Array<BallData> = []
         for(let i of this._ballGroup) {
             a.concat(i.filter((x)=>{return this.isNext(data,x) && (!isSameScore || data.score == x.score)}))
@@ -97,14 +97,14 @@ export default class BallController{
     /**
      * @param layer -1 means infinity
      */
-    getBallsByLayer(data:Array<BallData>,layer:number = 1):Array<BallData> {
+    getBallsByLayer(data:Array<BallData>,isSameScore:Boolean = false,layer:number = 1):Array<BallData> {
         if(layer == 0) {
             return data
         }
         let a:Array<BallData> = [];
         let temp:Array<BallData>;
         for(let i of data) {
-            temp = this.getSurroundedBalls(i);
+            temp = this.getSurroundedBalls(i,isSameScore);
             for(let j of temp){
                 if(a.indexOf(j) == -1) {
                     a.push(j);
@@ -115,7 +115,7 @@ export default class BallController{
         if(data == a) {
             return a;
         }else {
-            return this.getBallsByLayer(a,layer)
+            return this.getBallsByLayer(a,isSameScore,layer)
         }
     }
 
