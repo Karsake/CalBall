@@ -89,9 +89,12 @@ export default class BallController{
                     // console.log(`${dotNode.x},${dotNode.y},${j.node.x},${j.node.y}`)
                     this.aimBall = j;
                     // console.log(this.aimBall.row)
-
                 }
             }
         }
+    }
+
+    isNext(data1:BallData,data2:BallData):Boolean {
+        return data1 != data2 && Math.abs(data1.column - data2.column) < 1 && Math.abs(data1.row - data2.row) < 1 && (data1.row%2?data1.column <= data2.column :data2.column <= data1.column)
     }
 }

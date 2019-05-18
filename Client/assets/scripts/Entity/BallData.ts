@@ -61,7 +61,7 @@ export default class BallData extends cc.Component {
     public get isTarget():Boolean {
         return this._isTarget
     }
-    
+
     public clearNew() {
         this._isNew = false;
         this._isTarget = false;
@@ -95,5 +95,9 @@ export default class BallData extends cc.Component {
 
     public get row():number{
         return this._row
+    }
+
+    public get column():number{
+        return this._column
     }
 }
