@@ -1,4 +1,4 @@
-import { BallScore, BallColor } from "../Utils/Define";
+import { BallScore, BallColor, CLIENT_EVENT } from "../Utils/Define";
 import BallController from "../Controller/BallController";
 import GameConfig from "../Utils/GameConfig";
 
@@ -14,8 +14,8 @@ export default class ShootingBall extends cc.Component {
                 let tempScore:number = BallController.instance.aimBall.score;
                 BallController.instance.aimBall.node[`ballData`].isTarget = false;
                 BallController.instance.aimBall.score = tempScore;
+                BallController.instance.setAimBall();
             }
-            this.reset();
         }
     }
 
@@ -32,6 +32,14 @@ export default class ShootingBall extends cc.Component {
 
     onLoad() {
         this.reset();
+    }
+
+    onEnable() {
+        cc.director.on(CLIENT_EVENT.RESET_BALL,this.reset,this);
+    }
+
+    onDisable() {
+        cc.director.off(CLIENT_EVENT.RESET_BALL,this.reset,this);
     }
 
     update(){

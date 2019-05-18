@@ -1,6 +1,6 @@
 import BallData from "../Entity/BallData";
 import GameConfig from "../Utils/GameConfig";
-import { BallScore } from "../Utils/Define";
+import { BallScore, CLIENT_EVENT } from "../Utils/Define";
 
 export default class BallController{
 
@@ -80,6 +80,11 @@ export default class BallController{
                 }
             }
         }
+    }
+
+    setAimBall() {
+        BallController.instance.aimBall.setNew();
+        cc.director.emit(CLIENT_EVENT.RESET_BALL);
     }
 
     isNext(data1:BallData,data2:BallData):Boolean {

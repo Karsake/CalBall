@@ -36,7 +36,6 @@ export default class BallData extends cc.Component {
      */
     public set score(x:BallScore) {
         this._score = x;
-        this._isNew = true;
         if(BallController.instance.maxBallScore < x) {
             BallController.instance.maxBallScore = x;
         }
@@ -64,9 +63,11 @@ export default class BallData extends cc.Component {
 
     public clearNew() {
         this._isNew = false;
-        this._isTarget = false;
     }
 
+    public setNew() {
+        this._isNew = true;
+    }
     public ballPush() {
         var notZero:boolean = this._score != BallScore.lv0;
         if(this._row == GameConfig.row - 1) {
