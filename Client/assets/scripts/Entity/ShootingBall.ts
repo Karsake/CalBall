@@ -20,6 +20,11 @@ export default class ShootingBall extends cc.Component {
     }
 
     reset() {
+        for(let i of BallController.instance.ballGroup) {
+            for(let j of i) {
+                j.clearNew();
+            }
+        }
         BallController.instance.isShooting = false;
         BallController.instance.aimBall = null;
         this.node.setPosition(0,-380);
