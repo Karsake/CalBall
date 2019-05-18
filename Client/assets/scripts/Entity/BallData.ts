@@ -22,7 +22,7 @@ export default class BallData extends cc.Component {
             this.node = ballNode;
             this.score = BallScore.lv0;
         }else{
-            throw("bubble init failure")
+            throw("ball init failure")
         }
         this.setBall()
     }

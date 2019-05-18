@@ -94,8 +94,29 @@ export default class BallController{
         return a
     }
 
-    getBallsByLayer(data:Array<BallData>,layer:number = -1) {
-
+    /**
+     * @param layer -1 means infinity
+     */
+    getBallsByLayer(data:Array<BallData>,layer:number = 1):Array<BallData> {
+        if(layer == 0) {
+            return data
+        }
+        let a:Array<BallData> = [];
+        let temp:Array<BallData>;
+        for(let i of data) {
+            temp = this.getSurroundedBalls(i);
+            for(let j of temp){
+                if(a.indexOf(j) == -1) {
+                    a.push(j);
+                }
+            }
+        }
+        layer -= 1;
+        if(data == a) {
+            return a;
+        }else {
+            return this.getBallsByLayer(a,layer)
+        }
     }
 
     getUnattachedBalls() {
