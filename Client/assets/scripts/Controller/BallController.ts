@@ -63,21 +63,6 @@ export default class BallController{
 
     }
 
-    /**
-     * 递归获取某个球周围的若干层泡泡
-     * @param data 传入的参数
-     * @param isSameScore 默认为false，设为true则只取相同分数的泡泡
-     * @param layer 层数，若为-1则获取全部相连
-     */
-    getSurroundedBalls(data:BallData,isSameScore:boolean = false,layer:number = 1):Array<BallData> {
-        let a:Array<BallData> = [];
-        return a
-    }
-
-    getUnattachedBalls() {
-        this._ballGroup
-    }
-
     checkAimBall(dotNode:cc.Node):void {
         for(let i of this._ballGroup) {
             for(let j of i) {
@@ -100,4 +85,21 @@ export default class BallController{
         Math.abs(data1.row - data2.row) < 1 &&
         (data1.row % 2 ? data1.column <= data2.column : data2.column <= data1.column)
     }
+        
+    getSurroundedBalls(data:BallData,isSameScore:boolean = false):Array<BallData> {
+        let a:Array<BallData> = []
+        for(let i of this._ballGroup) {
+            a.concat(i.filter((x)=>{return this.isNext(data,x) && (!isSameScore || data.score == x.score)}))
+        }
+        return a
+    }
+
+    getBallsByLayer(data:Array<BallData>,layer:number = -1) {
+
+    }
+
+    getUnattachedBalls() {
+        this._ballGroup
+    }
+
 }
