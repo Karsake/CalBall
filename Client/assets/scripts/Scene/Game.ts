@@ -69,6 +69,8 @@ export default class Game extends cc.Component {
 
     onEnable() {
         cc.director.on(CLIENT_EVENT.SCORE_UPDATE,this.showScore,this);
+        cc.director.on(CLIENT_EVENT.DROP_BALL,this.dropBall,this);
+
         this.shootingPanel.on(cc.Node.EventType.TOUCH_START,this.getAimLine,this);
         this.shootingPanel.on(cc.Node.EventType.TOUCH_MOVE,this.getAimLine,this);
         this.shootingPanel.on(cc.Node.EventType.TOUCH_CANCEL,this.clearAimLine,this);
@@ -80,6 +82,8 @@ export default class Game extends cc.Component {
 
     onDisable() {
         cc.director.off(CLIENT_EVENT.SCORE_UPDATE,this.showScore,this);
+        cc.director.off(CLIENT_EVENT.DROP_BALL,this.dropBall,this);
+
         this.shootingPanel.off(cc.Node.EventType.TOUCH_START,this.getAimLine);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_MOVE,this.getAimLine);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_END,this.shootBall);
@@ -216,14 +220,13 @@ export default class Game extends cc.Component {
         }
     }
 
-    dropBall(node:cc.Node) {
-        node.opacity = 0;
+    dropBall(data:BallData) {
         let ballNode = this._fallenBallsPool.get();
         ballNode.parent = this.fallenNode;
-        ballNode.setPosition(node.x,node.y);
+        ballNode.setPosition(data.node.x,data.node.y);
         let randX = Math.random();
         let randY = Math.sqrt(1 - randX * randX);
-        ballNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(randX * 20,randY * 20);
+        ballNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(randX * 50,randY * 50);
     }
 
     update(dt) {
@@ -240,7 +243,7 @@ export default class Game extends cc.Component {
             }
         }
         for(let i of this.fallenNode.children) {
-            if(i.y < 700) {
+            if(i.y < -700) {
                 this._fallenBallsPool.put(i);
             }
         }

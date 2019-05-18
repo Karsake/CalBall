@@ -90,9 +90,10 @@ export default class BallController{
     setAimBall() {
         let x = this.getBallsByLayer([BallController.instance.aimBall],true,-1);
         if(x.length > GameConfig.minCombine) {
-            // for(let i of x) {
-            //     i.score = BallScore.lv0;
-            // }
+            for(let i of x) {
+                cc.director.emit(CLIENT_EVENT.DROP_BALL,i)
+                i.score = BallScore.lv0;
+            }
         }
         this.ballBounce(BallController.instance.aimBall);
         cc.director.emit(CLIENT_EVENT.RESET_BALL);
@@ -135,6 +136,10 @@ export default class BallController{
         }else {
             return this.getBallsByLayer(a,isSameScore,layer - 1)
         }
+    }
+
+    findAttached(data:Array<BallData>) {
+
     }
 
     isAttached(data:BallData):Boolean {

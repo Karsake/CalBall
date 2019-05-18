@@ -35,7 +35,8 @@ export class GameSave{
 
 export enum CLIENT_EVENT{
     SCORE_UPDATE = "SCORE_UPDATE",
-    RESET_BALL = "RESET_BALL"
+    RESET_BALL = "RESET_BALL",
+    DROP_BALL = "DROP_BALL"
 }
 
 export enum SCENE_NAME{
