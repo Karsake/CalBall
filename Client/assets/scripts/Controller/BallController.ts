@@ -60,7 +60,12 @@ export default class BallController{
     }
 
     public ballBounce(data:BallData) {
-
+        let arr = this.getSurroundedBalls(data);
+        for(let i of arr) {
+            let deltaX = i.node.x - data.node.x;
+            let deltaY = i.node.y - data.node.y;
+            i.node.runAction(cc.sequence(cc.moveBy(0.05,deltaX/5,deltaY / 5),cc.moveBy(0.05,-deltaX/5,-deltaY / 5)))
+        }
     }
 
     checkAimBall(dotNode:cc.Node):void {
@@ -89,7 +94,7 @@ export default class BallController{
         //     console.log(this.isNext(BallController.instance.aimBall,i),BallController.instance.aimBall.row,i.row)
         // }
         console.log(x)
-
+        this.ballBounce(BallController.instance.aimBall);
         cc.director.emit(CLIENT_EVENT.RESET_BALL);
     }
 
