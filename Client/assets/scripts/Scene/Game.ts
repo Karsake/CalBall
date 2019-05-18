@@ -121,7 +121,7 @@ export default class Game extends cc.Component {
         if(!this._lineDotsPool) {
             this._lineDotsPool = new cc.NodePool();
         }
-        while(this._lineDotsPool.size() < 25){
+        while(this._lineDotsPool.size() < 60){
             this._lineDotsPool.put(cc.instantiate(this.dotPrefab))
         }
         if(!this._fallenBallsPool) {
@@ -152,12 +152,13 @@ export default class Game extends cc.Component {
             deltaY = - deltaY;
         }
         let distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        let unitX = deltaX / distance * 50;
-        let unitY = deltaY / distance * 50;
-        if(unitY < 10) {
+        let unitX = deltaX / distance * 30;
+        let unitY = deltaY / distance * 30;
+        if(unitY < 8) {
             //角度过小的情况下取消发射
             return
         }
+        BallController.instance.isAimBallSet = false;
         while(this._lineDotsPool.size() > 0) {
             let x = this._lineDotsPool.get();
             this.dotNode.addChild(x);
@@ -167,7 +168,7 @@ export default class Game extends cc.Component {
             }else if(posX < - 300) {
                 posX = - 600 - posX;
             }
-            !BallController.instance.isShooting && BallController.instance.checkAimBall(x);
+            !BallController.instance.isShooting && !BallController.instance.isAimBallSet && BallController.instance.checkAimBall(x);
  
             x.setPosition(posX,this._lineDotsPool.size() * unitY - 380);
         }
