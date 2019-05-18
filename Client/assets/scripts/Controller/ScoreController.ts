@@ -35,6 +35,9 @@ export default class ScoreController{
         }
     }
 
+    public addScore(x:number) {
+        this.score = this._score + x;
+    }
     public get score() {
         return this._score;
     }

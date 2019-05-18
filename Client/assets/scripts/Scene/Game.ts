@@ -221,6 +221,7 @@ export default class Game extends cc.Component {
     }
 
     dropBall(data:BallData) {
+        ScoreController.instance.addScore(data.score)
         let ballNode = this._fallenBallsPool.get();
         ballNode.parent = this.fallenNode;
         ballNode.setPosition(data.node.x,data.node.y);
@@ -228,7 +229,7 @@ export default class Game extends cc.Component {
         ballNode.getChildByName("score").getComponent(cc.Label).string = `${data.score}`;
         let randX = Math.random();
         let randY = Math.sqrt(1 - randX * randX);
-        ballNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(randX * 50,randY * 50);
+        ballNode.getComponent(cc.RigidBody).linearVelocity = cc.v2(200 - randX * 400,randY * 200);
     }
 
     update(dt) {
