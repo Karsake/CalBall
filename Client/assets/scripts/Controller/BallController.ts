@@ -89,11 +89,11 @@ export default class BallController{
 
     setAimBall() {
         let x = this.getBallsByLayer([BallController.instance.aimBall],true,-1);
-        // let x = this.getSurroundedBalls(BallController.instance.aimBall,true);
-        // for(let i of x){
-        //     console.log(this.isNext(BallController.instance.aimBall,i),BallController.instance.aimBall.row,i.row)
-        // }
-        console.log(x)
+        if(x.length > GameConfig.minCombine) {
+            // for(let i of x) {
+            //     i.score = BallScore.lv0;
+            // }
+        }
         this.ballBounce(BallController.instance.aimBall);
         cc.director.emit(CLIENT_EVENT.RESET_BALL);
     }
