@@ -1,6 +1,6 @@
 import {BallScore} from "../Utils/Define";
 class GameConfig{
-    initRoundTime:number = 100;
+    initRoundTime:number = 10;
     minRoundTime:number = 1;
     timeRatial:number = 0.9;//与上一轮对比的时间比例
     initLine:number = 4;

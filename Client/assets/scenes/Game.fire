@@ -596,8 +596,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 600,
-      "height": 1100
+      "width": 750,
+      "height": 1500
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1870,9 +1870,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 187,
-      "g": 149,
-      "b": 194,
+      "r": 248,
+      "g": 184,
+      "b": 69,
       "a": 255
     },
     "_contentSize": {
