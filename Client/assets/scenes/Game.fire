@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1.1149553579869906,
-      "y": 1.1149553579869906,
+      "x": 0.2818473575712144,
+      "y": 0.2818473575712144,
       "z": 1
     },
     "_quat": {
@@ -483,7 +483,7 @@
       "__uuid__": "8ef67b1c-f70c-4513-9389-c76be6a19b33"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 2,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -3008,7 +3008,7 @@
       "height": 1334
     },
     "_fitWidth": true,
-    "_fitHeight": true,
+    "_fitHeight": false,
     "_id": "fenE1I58pPh77cx47iVp27"
   },
   {
@@ -3024,6 +3024,9 @@
     },
     "shootingBallNode": {
       "__id__": 16
+    },
+    "bgNode": {
+      "__id__": 5
     },
     "ballPanelNode": {
       "__id__": 12

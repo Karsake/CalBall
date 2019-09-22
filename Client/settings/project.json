@@ -55,7 +55,7 @@
       "enable": false
     }
   },
-  "fit-height": true,
+  "fit-height": false,
   "fit-width": true,
   "group-list": [
     "default",
@@ -64,7 +64,7 @@
     "panel",
     "null"
   ],
-  "last-module-event-record-time": 1557803606235,
+  "last-module-event-record-time": 1569136143150,
   "simulator-orientation": false,
   "simulator-resolution": {
     "height": 640,

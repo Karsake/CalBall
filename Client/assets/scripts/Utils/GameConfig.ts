@@ -8,7 +8,7 @@ class GameConfig{
     collumn:number = 8;
     ballSize:number = 80;
     initMin:number = BallScore.lv1;
-    initMax:number = BallScore.lv11;
+    initMax:number = BallScore.lv6;
     minCombine:number = 2;
 
     heightShift:number = 0.866;//3^0.5 / 2

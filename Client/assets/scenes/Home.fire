@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.6122007534658908,
-      "y": 0.6122007534658908,
+      "x": 0.2818473575712144,
+      "y": 0.2818473575712144,
       "z": 1
     },
     "_quat": {
@@ -799,7 +799,7 @@
       "height": 1334
     },
     "_fitWidth": true,
-    "_fitHeight": true,
+    "_fitHeight": false,
     "_id": "e8p0pRtWpPA6B2Gd6jdkJp"
   },
   {
@@ -810,6 +810,9 @@
       "__id__": 2
     },
     "_enabled": true,
+    "bgNode": {
+      "__id__": 5
+    },
     "_id": "a2XG24NzdN8K/MX+1yVum7"
   }
 ]

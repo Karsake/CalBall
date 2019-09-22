@@ -15,6 +15,9 @@ export default class Game extends cc.Component {
 
     @property(cc.Node)
     shootingBallNode:cc.Node = null;
+    
+    @property(cc.Node)
+    bgNode:cc.Node = null;
 
     @property(cc.Node)
     ballPanelNode:cc.Node = null;
@@ -59,10 +62,10 @@ export default class Game extends cc.Component {
     _xVelocity:number;
     _yVelocity:number;
     start () {
-        
     }
 
     onLoad () {
+        this.bgNode.height = cc.winSize.height;
         this.initNewGame();
     }
 
