@@ -238,6 +238,7 @@ export default class Game extends cc.Component {
             // console.log(BallController.instance.roundTime,this._lastRoundTime)
             BallController.instance.roundTime -= dt;
             this.processBar.progress = BallController.instance.roundTime / this._lastRoundTime;
+            // console.log(BallController.instance.ballGroup)
             if(BallController.instance.roundTime <= 0) {
                 this.ballPush();
                 BallController.instance.gameRound += 1;

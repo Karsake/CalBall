@@ -13,6 +13,7 @@ export default class ShootingBall extends cc.Component {
             if(BallController.instance.aimBall && BallController.instance.isShooting) {
                 BallController.instance.aimBall.node[`ballData`].isTarget = false;
                 BallController.instance.aimBall.score = BallController.instance.shootingScore;
+                BallController.instance.dropUnattachedBalls();
                 BallController.instance.setAimBall();
             }
         }

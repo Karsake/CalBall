@@ -95,6 +95,7 @@ export default class BallController{
                 i.score = BallScore.lv0;
             }
         }
+        this.dropUnattachedBalls();
         this.ballBounce(BallController.instance.aimBall);
         cc.director.emit(CLIENT_EVENT.RESET_BALL);
     }
@@ -113,10 +114,10 @@ export default class BallController{
         }
     }
         
-    getSurroundedBalls(data:BallData,isSameScore:Boolean = false):Array<BallData> {
+    getSurroundedBalls(data:BallData,isSameScore:Boolean = false,isNoneZero:boolean = false):Array<BallData> {
         let a:Array<BallData> = []
         for(let i of this._ballGroup) {
-            a = a.concat(i.filter((x)=>{return this.isNext(data,x) && (!isSameScore || data.score == x.score && data.score != BallScore.lv0)}));
+            a = a.concat(i.filter((x)=>{return this.isNext(data,x) && (!isSameScore || data.score == x.score && data.score != BallScore.lv0) &&  (isNoneZero? !!x.score : true)}));
         }
         return a
     }
@@ -124,14 +125,14 @@ export default class BallController{
     /**
      * @param layer -1 means infinity
      */
-    getBallsByLayer(data:Array<BallData>,isSameScore:Boolean = false,layer:number = 1):Array<BallData> {
+    getBallsByLayer(data:Array<BallData>,isSameScore:Boolean = false,layer:number = 1,isNoneZero:boolean = false):Array<BallData> {
         if(layer == 0) {
             return data
         }
         let a:Array<BallData> = data;
         let temp:Array<BallData>;
         for(let i of data) {
-            temp = this.getSurroundedBalls(i,isSameScore);
+            temp = this.getSurroundedBalls(i,isSameScore,isNoneZero);
             for(let j of temp){
                 if(a.indexOf(j) == -1) {
                     a.push(j);
@@ -159,8 +160,24 @@ export default class BallController{
         return false
     }
 
-    getUnattachedBalls() {
-        this._ballGroup
+    dropUnattachedBalls() {
+        let baseArray:Array<BallData> = this._ballGroup[GameConfig.row - 2 + this.gameRound].filter((x:BallData)=>{
+            return x.score
+        });
+        if(!baseArray.length) {
+            return baseArray
+        }
+        let attachedArray:Array<BallData> = this.getBallsByLayer(baseArray,false,-1,true);
+        for(var i of this._ballGroup) {
+            i.map((x:BallData)=>{
+                if(attachedArray.indexOf(x) == -1) {
+                    if(x.score)
+                        cc.director.emit(CLIENT_EVENT.DROP_BALL,x);
+                        x.score = BallScore.lv0;
+                }
+            })
+        }
+
     }
 
 }
