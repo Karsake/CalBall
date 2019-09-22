@@ -9,10 +9,16 @@ class Util{
         this.setSave();
     }
 
+    private lastSaveTime:Date;
     setSave() {
+        if(this.lastSaveTime && new Date().getTime() - this.lastSaveTime.getTime() < 100) {
+            // console.log("save too frequent")
+            return
+        }
+        this.lastSaveTime = new Date();
         var x = new GameSave();
         x.maxScore = ScoreController.instance.maxScore;
-        x.lastScore = ScoreController.instance.lastScore;
+        x.lastScore = ScoreController.instance.score;
         localStorage.setItem("game_save",JSON.stringify(x));
     }
 }

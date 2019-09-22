@@ -1,6 +1,7 @@
 import GameConfig from "../Utils/GameConfig";
-import { BallScore, BallColor } from "../Utils/Define";
+import { BallScore, BallColor, CLIENT_EVENT } from "../Utils/Define";
 import BallController from "../Controller/BallController";
+import Util from "../Utils/Util";
 
 const {ccclass, property} = cc._decorator;
 
@@ -72,8 +73,10 @@ export default class BallData extends cc.Component {
             this._row -= 1;
             if(this._row == -1) {
                 if(notZero && !this._isTarget) {
-                    console.warn("GameOver")
+                    // console.warn("GameOver")
                     BallController.instance.isStart = false;
+                    cc.director.emit(CLIENT_EVENT.GAME_OVER);
+                    Util.setSave();
                 }
                 this._row += GameConfig.row;
                 this.node.y += GameConfig.row * GameConfig.heightShift * GameConfig.ballSize;

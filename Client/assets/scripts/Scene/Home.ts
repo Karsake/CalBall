@@ -1,5 +1,6 @@
 import ScoreController from "../Controller/ScoreController";
 import { CLIENT_EVENT, SCENE_NAME } from "../Utils/Define";
+import Util from "../Utils/Util";
 
 const {ccclass, property} = cc._decorator;
 
@@ -12,6 +13,7 @@ export default class Home extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        Util.loadSave();
         this.Btnstart = cc.find("btn_start",this.node);
         this.TextMax = cc.find("text_max",this.node).getComponent(cc.Label);
     }

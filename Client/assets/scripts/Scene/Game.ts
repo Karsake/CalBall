@@ -1,6 +1,6 @@
 import ScoreController from "../Controller/ScoreController";
 import Config from "../Utils/GameConfig";
-import { CLIENT_EVENT, BallScore } from "../Utils/Define";
+import { CLIENT_EVENT, BallScore, SCENE_NAME } from "../Utils/Define";
 import BallController from "../Controller/BallController";
 import BallData from "../Entity/BallData";
 import GameConfig from "../Utils/GameConfig";
@@ -64,33 +64,34 @@ export default class Game extends cc.Component {
 
     onLoad () {
         this.initNewGame();
-        this.scoreLabel.string = "";
     }
 
     onEnable() {
         cc.director.on(CLIENT_EVENT.SCORE_UPDATE,this.showScore,this);
         cc.director.on(CLIENT_EVENT.DROP_BALL,this.dropBall,this);
+        cc.director.on(CLIENT_EVENT.GAME_OVER,this.pauseGame,this);
 
         this.shootingPanel.on(cc.Node.EventType.TOUCH_START,this.getAimLine,this);
         this.shootingPanel.on(cc.Node.EventType.TOUCH_MOVE,this.getAimLine,this);
         this.shootingPanel.on(cc.Node.EventType.TOUCH_CANCEL,this.clearAimLine,this);
         this.shootingPanel.on(cc.Node.EventType.TOUCH_END,this.shootBall,this);
-        this.pauseBtn.on(cc.Node.EventType.TOUCH_END,this.pauseGame,this);
-        this.resumeBtn.on(cc.Node.EventType.TOUCH_END,this.resumeGame,this);
-        this.btnReset.on(cc.Node.EventType.TOUCH_END,this.initNewGame,this);
+        // this.pauseBtn.on(cc.Node.EventType.TOUCH_END,this.pauseGame,this);
+        // this.resumeBtn.on(cc.Node.EventType.TOUCH_END,this.resumeGame,this);
+        // this.btnReset.on(cc.Node.EventType.TOUCH_END,this.initNewGame,this);
     }
 
     onDisable() {
         cc.director.off(CLIENT_EVENT.SCORE_UPDATE,this.showScore,this);
         cc.director.off(CLIENT_EVENT.DROP_BALL,this.dropBall,this);
+        cc.director.off(CLIENT_EVENT.GAME_OVER,this.pauseGame,this);
 
         this.shootingPanel.off(cc.Node.EventType.TOUCH_START,this.getAimLine);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_MOVE,this.getAimLine);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_END,this.shootBall);
         this.shootingPanel.off(cc.Node.EventType.TOUCH_CANCEL,this.clearAimLine);
-        this.pauseBtn.off(cc.Node.EventType.TOUCH_END,this.pauseGame,this);
-        this.resumeBtn.off(cc.Node.EventType.TOUCH_END,this.resumeGame,this);
-        this.btnReset.off(cc.Node.EventType.TOUCH_END,this.initNewGame,this);
+        // this.pauseBtn.off(cc.Node.EventType.TOUCH_END,this.pauseGame,this);
+        // this.resumeBtn.off(cc.Node.EventType.TOUCH_END,this.resumeGame,this);
+        // this.btnReset.off(cc.Node.EventType.TOUCH_END,this.initNewGame,this);
 
     }
     
@@ -134,9 +135,12 @@ export default class Game extends cc.Component {
         while(this._fallenBallsPool.size() < 25){
             this._fallenBallsPool.put(cc.instantiate(this.fallenBall))
         }
-        BallController.instance.isStart = true;
+        this.resumeGame();
     }
 
+    toHome() {
+        cc.director.loadScene(SCENE_NAME.HOME)
+    }
     pauseGame() {
         BallController.instance.isStart = false;
         this.pausePanel.active = true;
