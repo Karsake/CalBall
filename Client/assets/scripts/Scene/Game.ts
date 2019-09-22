@@ -142,11 +142,13 @@ export default class Game extends cc.Component {
         cc.director.loadScene(SCENE_NAME.HOME)
     }
     pauseGame() {
+        this.pauseBtn.active = false;
         BallController.instance.isStart = false;
         this.pausePanel.active = true;
     }
 
     resumeGame() {
+        this.pauseBtn.active = true;
         BallController.instance.isStart = true;
         this.pausePanel.active = false;
     }

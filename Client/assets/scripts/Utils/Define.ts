@@ -18,11 +18,11 @@ export enum BallColor{
     lv1="#FF6666",
     lv2="#FFCC99",
     lv3="#FF9900",
-    lv4="#CCCCFF",
+    lv4="#96E949",
     lv5="#FFFF66",
     lv6="#FF6699",
     lv7="#CCFF66",
-    lv8="#99CC33",
+    lv8="#B45DDD",
     lv9="#99CCFF",
     lv10="#0099FF",
     lv11="#FF99CC"

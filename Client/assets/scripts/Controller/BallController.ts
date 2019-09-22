@@ -107,7 +107,7 @@ export default class BallController{
         if(data1.row == data2.row) {
             return true
         }
-        if(data1.row % 2 ? data1.column <= data2.column : data2.column <= data1.column) {
+        if((data1.row + this.gameRound) % 2 ? data1.column <= data2.column : data2.column <= data1.column) {
             return true
         }else {
             return false
@@ -161,17 +161,19 @@ export default class BallController{
     }
 
     dropUnattachedBalls() {
-        let baseArray:Array<BallData> = this._ballGroup[GameConfig.row - 2 + this.gameRound].filter((x:BallData)=>{
-            return x.score
-        });
-        if(!baseArray.length) {
-            return baseArray
+        let baseArray:Array<BallData> = [];
+        for(var i of this._ballGroup) {
+            for(var j of i) {
+                if(j.row == GameConfig.row - 2) {
+                    baseArray.push(j);
+                }
+            }
         }
         let attachedArray:Array<BallData> = this.getBallsByLayer(baseArray,false,-1,true);
         for(var i of this._ballGroup) {
             i.map((x:BallData)=>{
-                if(attachedArray.indexOf(x) == -1) {
-                    if(x.score)
+                if(!attachedArray.filter((y:BallData)=>{return y.row == x.row && y.column == x.column}).length) {
+                    if(x.score && !x.isTarget)
                         cc.director.emit(CLIENT_EVENT.DROP_BALL,x);
                         x.score = BallScore.lv0;
                 }

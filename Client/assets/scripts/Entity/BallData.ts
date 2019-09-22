@@ -41,7 +41,8 @@ export default class BallData extends cc.Component {
         }
         this.node.opacity = this._score == BallScore.lv0 ? 0 : 255;
         this.node.color = new cc.Color().fromHEX(BallColor[BallScore[x]]);
-        this.node.getChildByName("score").getComponent(cc.Label).string = this._score + ""//this._row + "_" +this._column//;
+        this.node.getChildByName("score").getComponent(cc.Label).string = this._score + "";
+        // this.node.getChildByName("score").getComponent(cc.Label).string = this._row + "_" + this._column;
     }
 
     public get score():BallScore {
@@ -81,6 +82,7 @@ export default class BallData extends cc.Component {
                 this._row += GameConfig.row;
                 this.node.y += GameConfig.row * GameConfig.heightShift * GameConfig.ballSize;
             }
+            // this.node.getChildByName("score").getComponent(cc.Label).string = this._row + "_" + this._column;
         }, 300);
 
     }
