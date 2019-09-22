@@ -11,7 +11,6 @@ export default class BallData extends cc.Component {
     private _column:number = -1
 
     private _score:BallScore;
-    private _isNew:Boolean;
     private _isTarget:Boolean;
 
     init(row,column,ballNode:cc.Node) {
