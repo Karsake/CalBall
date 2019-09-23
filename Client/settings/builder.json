@@ -29,14 +29,14 @@
     "portrait": true,
     "upsideDown": false
   },
-  "packageName": "org.cocos2d.popCap",
+  "packageName": "org.dustlight.calball",
   "qqplay": {
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait",
     "zip": false
   },
   "startScene": "cff8f153-b795-441e-9f2d-d51bb5e49865",
-  "title": "popCap",
+  "title": "CalBall",
   "webOrientation": "portrait",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
