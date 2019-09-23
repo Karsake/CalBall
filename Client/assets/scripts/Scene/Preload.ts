@@ -6,6 +6,9 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class Preload extends cc.Component {
 
+    start() {
+        Util.dealMulityEventListener();
+    }
     onLoad () {
         Util.loadSave();
         
@@ -14,10 +17,4 @@ export default class Preload extends cc.Component {
 
         cc.director.loadScene(SCENE_NAME.HOME);
     }
-
-    // start () {
-
-    // }
-
-    // update (dt) {}
 }
