@@ -68,6 +68,64 @@ class Util{
             }
         };
     }
+    /**
+     * 展示一个toast
+     * 展示时间dration默认2000毫秒
+     * 消失延时fadeDelay默认500毫秒
+     * TODO 这玩意没做完
+     */
+    showToast(text:string,success:Function,duration?:number,fadeDelay?:number) {
+        if(typeof(text) != "string") {
+            return
+        }
+        var fadeInterval = 100;//每次消失间隔100毫秒
+        var startOpacity = 0.5;
+        if(!duration || duration < 0) {
+            duration = 2000;
+        }
+        if(!fadeDelay || fadeDelay < 0) {
+            fadeDelay = 500;
+        }
+        let newToast:HTMLElement = new HTMLElement();
+        
+        let backImage = document.createElement("canvas");
+        newToast.appendChild(backImage);
+        backImage.width = 10;
+        backImage.height = 10;
+        let ctx:CanvasRenderingContext2D = backImage.getContext("2d");
+        ctx.fillStyle = "gray";
+        ctx.fillRect(0,0,10,10);
+
+        let newLabel:HTMLElement = document.createElement("LABEL");
+        newToast.appendChild(newLabel);
+        newLabel.style.overflow =  "visible";
+        newLabel.style.verticalAlign = "middle";
+        newLabel.style.textAlign = "center";
+        newLabel.style.width = "380";
+        newLabel.innerText = text;
+
+        newToast.style.width = newLabel.style.width + 30;
+        newToast.style.height = newLabel.style.height + 30;
+        newToast.style.verticalAlign = "middle";
+        newToast.style.textAlign = "center";
+        newToast.style.opacity = startOpacity + "";
+        
+        document.body.appendChild(newToast);
+
+        window.setTimeout(function(){
+            var id = window.setInterval(() => {
+                newToast.style.opacity = parseInt(newToast.style.opacity) - startOpacity * fadeInterval / fadeDelay + "";
+                if(parseInt(newToast.style.opacity) <= 0) {
+                    window.clearTimeout(id);
+                    newToast.remove();
+                    if(typeof(success) == "function") {
+                        success();
+                    }
+                }
+            }, fadeInterval)
+        },duration)
+        
+    }
 }
 export default new Util();
 
